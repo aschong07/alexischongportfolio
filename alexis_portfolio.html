@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Alexis Chong — Instruments for Space</title>
+<!--
+  SETUP NOTES
+  1) Photos: create an /images folder next to this file:
+       images/lmaps.jpg  images/radiometer.jpg  images/petal.jpg  images/rover.jpg
+       images/cleanroom.jpg  images/aefles.jpg
+       images/gallery-1.jpg ... images/gallery-6.jpg   (the photo wall)
+     Empty slots show a labeled placeholder telling you which file to add.
+  2) Resume: put Alexis_Chong_Resume.pdf next to this file (the download button links to it).
+  3) Fun section: the bookshelf list is placeholder — swap in your real favorites.
+  4) Publish free: rename to index.html, push to a GitHub repo, Settings -> Pages.
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Archivo:wght@300;400;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --space:#0A0F1E;        /* deep space */
+    --space-2:#0E1528;      /* section alt */
+    --card:#131B33;
+    --line:#26304E;
+    --moonlight:#EAEEF6;    /* primary text */
+    --dust:#93A0B8;         /* secondary text */
+    --solar:#E5A045;        /* hot pole — sun amber */
+    --cold:#7FB0E0;         /* cold pole — sky blue */
+    --radius:16px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto}
+    *,*::before,*::after{animation:none!important;transition:none!important}
+  }
+  body{
+    font-family:'Archivo',system-ui,sans-serif;font-weight:300;
+    background:var(--space);color:var(--moonlight);line-height:1.6;
+    overflow-x:hidden;
+  }
+  h1,h2,h3,.nav-name{font-family:'Space Grotesk',sans-serif}
+  a{color:var(--cold)}
+  a:focus-visible{outline:3px solid var(--solar);outline-offset:3px}
+  .mono{font-family:'IBM Plex Mono',monospace}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 22px}
+
+  /* ---------- starfield ---------- */
+  .stars,.stars2{position:fixed;inset:0;pointer-events:none;z-index:0}
+  .stars{
+    background-image:
+      radial-gradient(1px 1px at 12% 22%, #fff 50%, transparent 51%),
+      radial-gradient(1px 1px at 78% 12%, #cfe0ff 50%, transparent 51%),
+      radial-gradient(1.5px 1.5px at 34% 64%, #fff 50%, transparent 51%),
+      radial-gradient(1px 1px at 88% 48%, #fff 50%, transparent 51%),
+      radial-gradient(1px 1px at 56% 84%, #ffe9c9 50%, transparent 51%),
+      radial-gradient(1.5px 1.5px at 8% 88%, #cfe0ff 50%, transparent 51%),
+      radial-gradient(1px 1px at 66% 34%, #fff 50%, transparent 51%),
+      radial-gradient(1px 1px at 24% 44%, #ffe9c9 50%, transparent 51%);
+    opacity:.8;
+  }
+  .stars2{
+    background-image:
+      radial-gradient(1px 1px at 42% 18%, #fff 50%, transparent 51%),
+      radial-gradient(1px 1px at 92% 76%, #fff 50%, transparent 51%),
+      radial-gradient(1px 1px at 16% 58%, #fff 50%, transparent 51%),
+      radial-gradient(1px 1px at 72% 92%, #cfe0ff 50%, transparent 51%);
+    opacity:.5;animation:twinkle 5s ease-in-out infinite alternate;
+  }
+  @keyframes twinkle{from{opacity:.25}to{opacity:.7}}
+
+  /* ---------- nav ---------- */
+  nav{position:sticky;top:0;z-index:20;background:rgba(10,15,30,.82);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  .nav-in{display:flex;justify-content:space-between;align-items:center;padding:14px 22px;max-width:1080px;margin:0 auto}
+  .nav-name{font-weight:700;letter-spacing:.02em;text-decoration:none;color:var(--moonlight)}
+  .nav-links{display:flex;gap:20px;flex-wrap:wrap}
+  .nav-links a{text-decoration:none;color:var(--dust);font-size:.9rem}
+  .nav-links a:hover{color:var(--moonlight)}
+
+  /* ---------- hero: the moon ---------- */
+  header{position:relative;z-index:1;min-height:92vh;display:flex;flex-direction:column;justify-content:center;overflow:hidden}
+  .moon{
+    position:absolute;left:50%;bottom:-32vw;transform:translateX(-50%) scale(var(--moonscale,1));
+    width:74vw;max-width:900px;aspect-ratio:1;border-radius:50%;
+    background:
+      radial-gradient(circle at 38% 30%, #F4F6FA 0%, #D8DDE8 34%, #AEB6C6 62%, #7C8598 86%, #5A6377 100%);
+    box-shadow:0 0 90px 18px rgba(207,224,255,.18), inset -46px -34px 90px rgba(10,15,30,.45);
+    transition:transform .2s ease-out;will-change:transform;
+  }
+  .moon::before{ /* craters */
+    content:"";position:absolute;inset:0;border-radius:50%;
+    background:
+      radial-gradient(circle at 26% 26%, rgba(90,99,119,.35) 0 3.2%, transparent 4%),
+      radial-gradient(circle at 62% 18%, rgba(90,99,119,.28) 0 2.2%, transparent 3%),
+      radial-gradient(circle at 74% 40%, rgba(90,99,119,.32) 0 4.4%, transparent 5.4%),
+      radial-gradient(circle at 44% 52%, rgba(90,99,119,.25) 0 2.6%, transparent 3.4%),
+      radial-gradient(circle at 20% 55%, rgba(90,99,119,.3) 0 3.6%, transparent 4.6%),
+      radial-gradient(circle at 57% 68%, rgba(90,99,119,.22) 0 5%, transparent 6%);
+  }
+  .hero-copy{position:relative;z-index:2;text-align:center;padding:110px 22px 0}
+  .eyebrow{font-family:'IBM Plex Mono',monospace;font-size:.78rem;letter-spacing:.16em;color:var(--solar);text-transform:uppercase}
+  h1{font-size:clamp(2.7rem,7.5vw,5rem);font-weight:700;letter-spacing:-.02em;line-height:1.04;margin:16px auto 18px;max-width:860px}
+  h1 .glow{color:var(--cold);text-shadow:0 0 26px rgba(127,176,224,.45)}
+  .tagline{max-width:620px;margin:0 auto;color:var(--dust);font-size:1.06rem}
+  .hero-ctas{margin-top:30px;display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+  .btn{
+    display:inline-block;padding:12px 22px;border-radius:999px;text-decoration:none;
+    font-family:'Space Grotesk',sans-serif;font-weight:500;font-size:.95rem;
+    border:1.5px solid var(--line);color:var(--moonlight);background:rgba(19,27,51,.6);
+    transition:transform .15s ease, background .15s ease, border-color .15s ease;
+  }
+  .btn:hover{transform:translateY(-2px);border-color:var(--cold)}
+  .btn.primary{background:var(--solar);border-color:var(--solar);color:#1A1206}
+  .btn.primary:hover{background:#F0B15A}
+  .scroll-hint{position:relative;z-index:2;text-align:center;margin-top:8vh;color:var(--dust);font-family:'IBM Plex Mono',monospace;font-size:.75rem;letter-spacing:.14em}
+
+  /* ---------- sections ---------- */
+  main{position:relative;z-index:1}
+  section{padding:86px 0 20px}
+  .sec-eyebrow{font-family:'IBM Plex Mono',monospace;font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;color:var(--solar)}
+  h2{font-size:2rem;font-weight:700;letter-spacing:-.01em;margin:8px 0 6px}
+  .sec-note{color:var(--dust);max-width:640px;margin-bottom:36px}
+
+  .feature{
+    display:grid;grid-template-columns:1.05fr 1fr;
+    background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+    overflow:hidden;margin-bottom:28px;
+  }
+  .feature:nth-of-type(even){grid-template-columns:1fr 1.05fr}
+  .feature:nth-of-type(even) .shot{order:2}
+  .shot{position:relative;min-height:280px;background:#0E1528}
+  .shot img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+  .shot.empty::after{
+    content:attr(data-need);
+    position:absolute;inset:14px;border:2px dashed var(--line);border-radius:12px;
+    display:flex;align-items:center;justify-content:center;text-align:center;padding:20px;
+    font-family:'IBM Plex Mono',monospace;font-size:.8rem;color:var(--dust);
+  }
+  .feat-body{padding:34px;display:flex;flex-direction:column}
+  .tag{font-family:'IBM Plex Mono',monospace;font-size:.72rem;letter-spacing:.13em;text-transform:uppercase;color:var(--solar);margin-bottom:10px}
+  .tag.cold{color:var(--cold)}
+  h3{font-size:1.35rem;font-weight:700;margin-bottom:10px}
+  .feat-body p{color:var(--dust);font-size:.97rem}
+  .facts{margin-top:auto;padding-top:18px;display:flex;gap:9px;flex-wrap:wrap}
+  .fact{font-family:'IBM Plex Mono',monospace;font-size:.73rem;padding:5px 11px;border:1px solid var(--line);border-radius:999px;color:var(--moonlight)}
+
+  .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:22px}
+  .cardp{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;display:flex;flex-direction:column}
+  .cardp .shot{min-height:190px}
+  .cardp .feat-body{padding:24px}
+  .cardp h3{font-size:1.1rem}
+  .cardp p{font-size:.92rem}
+
+  .also{margin-top:38px;border-top:1px solid var(--line)}
+  .also-row{display:grid;grid-template-columns:1fr auto;gap:8px;padding:18px 4px;border-bottom:1px solid var(--line);align-items:baseline}
+  .also-row strong{font-weight:600;font-family:'Space Grotesk',sans-serif}
+  .also-row span{display:block;color:var(--dust);font-size:.92rem}
+  .also-row .mono{color:var(--dust);font-size:.78rem;white-space:nowrap}
+
+  /* ---------- resume ---------- */
+  .resume-card{
+    background:linear-gradient(135deg, #141D3A, #0E1528);
+    border:1px solid var(--line);border-radius:var(--radius);padding:42px 38px;
+    display:grid;grid-template-columns:1.3fr 1fr;gap:34px;align-items:center;
+  }
+  .resume-list{list-style:none;margin-top:14px}
+  .resume-list li{display:flex;gap:12px;padding:7px 0;color:var(--dust);font-size:.95rem}
+  .resume-list li::before{content:"◆";color:var(--solar);font-size:.7rem;line-height:1.9}
+  .resume-side{text-align:center}
+  .resume-side .mono{display:block;color:var(--dust);font-size:.78rem;margin-top:12px}
+
+  /* ---------- gallery ---------- */
+  .gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+  .gallery .shot{min-height:220px;border-radius:12px;overflow:hidden;border:1px solid var(--line)}
+
+  /* ---------- off duty ---------- */
+  .fun-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+  .fun{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:28px 26px}
+  .fun .emoji{font-size:1.7rem}
+  .fun h3{font-size:1.08rem;margin:12px 0 8px}
+  .fun p,.fun li{color:var(--dust);font-size:.93rem}
+  .fun ul{list-style:none;margin-top:6px}
+  .fun li{padding:3px 0}
+  .fun li::before{content:"— "}
+
+  /* ---------- contact/footer ---------- */
+  .contact-card{
+    background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+    padding:46px 40px;display:flex;flex-wrap:wrap;gap:26px;align-items:center;justify-content:space-between;
+    box-shadow:0 0 60px rgba(127,176,224,.08);
+  }
+  .contact-card p{color:var(--dust);max-width:460px;margin-top:8px}
+  footer{padding:44px 0 50px;color:var(--dust);font-size:.84rem;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
+
+  @media (max-width:820px){
+    .feature,.feature:nth-of-type(even){grid-template-columns:1fr}
+    .feature:nth-of-type(even) .shot{order:0}
+    .grid,.fun-grid{grid-template-columns:1fr}
+    .gallery{grid-template-columns:repeat(2,1fr)}
+    .resume-card{grid-template-columns:1fr}
+    .nav-links{display:none}
+    .also-row{grid-template-columns:1fr}
+    .moon{width:130vw;bottom:-58vw}
+  }
+</style>
+</head>
+<body>
+<div class="stars" aria-hidden="true"></div>
+<div class="stars2" aria-hidden="true"></div>
+
+<nav>
+  <div class="nav-in">
+    <a class="nav-name" href="#top">Alexis Chong</a>
+    <div class="nav-links">
+      <a href="#work">Work</a>
+      <a href="#more">Projects</a>
+      <a href="#resume">Resume</a>
+      <a href="#photos">Photos</a>
+      <a href="#offduty">Off duty</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<header id="top">
+  <div class="hero-copy">
+    <div class="eyebrow">Honolulu, Hawai&#699;i &middot; 21.3&deg;N &middot; Electrical Engineering @ UH M&#257;noa</div>
+    <h1>Building instruments<br>from here to the <span class="glow">Moon</span>.</h1>
+    <p class="tagline">
+      Undergraduate researcher on a NASA Artemis lunar instrument, builder of a
+      student microwave observatory, comms lead on a Mars rover &mdash; from JPL
+      parts vetting to solder, steppers, and Python.
+    </p>
+    <div class="hero-ctas">
+      <a class="btn primary" href="#work">See the work</a>
+      <a class="btn" href="#resume">Resume</a>
+    </div>
+  </div>
+  <div class="scroll-hint">SCROLL &darr;</div>
+  <div class="moon" id="moon" aria-hidden="true"></div>
+</header>
+
+<main class="wrap">
+
+  <section id="work">
+    <div class="sec-eyebrow">01 &middot; Mission log</div>
+    <h2>Featured work</h2>
+    <p class="sec-note">Two instruments define my work right now: one headed for the Moon, one pointed at it from a rooftop in M&#257;noa.</p>
+
+    <article class="feature">
+      <figure class="shot" data-need="add photo &rarr; images/lmaps.jpg">
+        <img src="images/lmaps.jpg" alt="Alexis working on the L-MAPS instrument at HSFL" onerror="this.parentElement.classList.add('empty');this.remove()">
+      </figure>
+      <div class="feat-body">
+        <div class="tag">NASA Artemis &middot; Hawai&#699;i Space Flight Laboratory</div>
+        <h3>L-MAPS &mdash; Lunar Heat Flow Radiometer</h3>
+        <p>
+          A flight instrument that measures temperature and composition beneath the
+          Moon's surface from the Artemis Lunar Terrain Vehicle &mdash; slated to be
+          Hawai&#699;i's first instrument on the lunar surface. I vet RF components
+          against JPL heritage design specs, coordinate vendor quotes, and build the
+          procurement budget alongside JPL scientists.
+        </p>
+        <div class="facts">
+          <span class="fact">0.3&ndash;6 GHz</span>
+          <span class="fact">JPL collaboration</span>
+          <span class="fact">NASA Space Grant funded</span>
+        </div>
+      </div>
+    </article>
+
+    <article class="feature">
+      <figure class="shot" data-need="add photo &rarr; images/radiometer.jpg">
+        <img src="images/radiometer.jpg" alt="The 1.2 meter dish radiometer" onerror="this.parentElement.classList.add('empty');this.remove()">
+      </figure>
+      <div class="feat-body">
+        <div class="tag cold">HIGP &middot; Student observatory in progress</div>
+        <h3>Ground-Based Microwave Radiometer</h3>
+        <p>
+          A 1.2&nbsp;m dish, a satellite LNB, a $30 software radio, and a Raspberry Pi
+          &mdash; calibrated with a hot wall and cold sky until it measured the Sun at
+          roughly 10,000&nbsp;K. Now growing a motorized tracking mount (built around a
+          1965 broadcast pan head) toward a permanently stationed student observatory.
+        </p>
+        <div class="facts">
+          <span class="fact">Sun @ ~10,000 K</span>
+          <span class="fact">Python pipeline</span>
+          <span class="fact">Tracking mount in CAD</span>
+        </div>
+      </div>
+    </article>
+  </section>
+
+  <section id="more">
+    <div class="sec-eyebrow">02 &middot; Sky survey</div>
+    <h2>More projects</h2>
+    <p class="sec-note">Rovers, reactors, cleanrooms, and the occasional hackathon.</p>
+
+    <div class="grid">
+      <article class="cardp">
+        <figure class="shot" data-need="add photo &rarr; images/petal.jpg">
+          <img src="images/petal.jpg" alt="Project PETAL team" onerror="this.parentElement.classList.add('empty');this.remove()">
+        </figure>
+        <div class="feat-body">
+          <div class="tag">NASA RASC-AL &middot; Finalist</div>
+          <h3>Project PETAL</h3>
+          <p>Top-14 finalist of 150+ teams nationally. Modeled lunar thermal constraints guiding a fission-based power architecture for a crewed habitat. Covered by Hawaii News Now.</p>
+        </div>
+      </article>
+
+      <article class="cardp">
+        <figure class="shot" data-need="add photo &rarr; images/rover.jpg">
+          <img src="images/rover.jpg" alt="Team RoSE rover" onerror="this.parentElement.classList.add('empty');this.remove()">
+        </figure>
+        <div class="feat-body">
+          <div class="tag cold">University Rover Challenge</div>
+          <h3>Rover Comms &amp; Avionics Lead</h3>
+          <p>Designed the dual-band (900&nbsp;MHz / 2.4&nbsp;GHz) telemetry architecture for long-range rover operation; team ranked top 38 internationally.</p>
+        </div>
+      </article>
+
+      <article class="cardp">
+        <figure class="shot" data-need="add photo &rarr; images/cleanroom.jpg">
+          <img src="images/cleanroom.jpg" alt="Cleanroom fabrication" onerror="this.parentElement.classList.add('empty');this.remove()">
+        </figure>
+        <div class="feat-body">
+          <div class="tag cold">UH M&#257;noa Cleanroom</div>
+          <h3>Semiconductor Fabrication</h3>
+          <p>Fabricated OLEDs and capacitive pressure sensors with photolithography and thermal evaporation; operate the Heidelberg MLA&nbsp;150 direct-write lithography system.</p>
+        </div>
+      </article>
+
+      <article class="cardp">
+        <figure class="shot" data-need="add photo &rarr; images/aefles.jpg">
+          <img src="images/aefles.jpg" alt="AEFLES strain sensing system" onerror="this.parentElement.classList.add('empty');this.remove()">
+        </figure>
+        <div class="feat-body">
+          <div class="tag">Grant-funded &middot; Project lead</div>
+          <h3>AEFLES Strain Sensing</h3>
+          <p>Secured a $500 grant to build a real-time structural strain sensing system integrating 5+ sensors with embedded avionics, validated in Python and Julia simulation.</p>
+        </div>
+      </article>
+    </div>
+
+    <div class="also">
+      <div class="also-row">
+        <div><strong>Hawaii Annual Code Challenge &mdash; Finalist</strong><span>Front-end for a Hawai&#699;i-focused campus selection tool.</span></div>
+        <div class="mono">2025</div>
+      </div>
+      <div class="also-row">
+        <div><strong>Learning Assistant, Calculus II</strong><span>Weekly active-learning recitations for 80&ndash;90 students at UH M&#257;noa.</span></div>
+        <div class="mono">Jan&ndash;May 2026</div>
+      </div>
+      <div class="also-row">
+        <div><strong>Fablab Monitor, UH M&#257;noa</strong><span>Kept 3D printers and laser cutters running for student and research use.</span></div>
+        <div class="mono">2026&ndash;present</div>
+      </div>
+      <div class="also-row">
+        <div><strong>Robotic Technician Intern, DLIR</strong><span>Cut CNC machining errors 15% through calibration and 20+ precision part designs.</span></div>
+        <div class="mono">2024&ndash;2025</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="resume">
+    <div class="sec-eyebrow">03 &middot; Flight record</div>
+    <h2>Resume</h2>
+    <p class="sec-note">The one-page version, in classic LaTeX.</p>
+    <div class="resume-card">
+      <div>
+        <h3>Highlights</h3>
+        <ul class="resume-list">
+          <li>B.S. Electrical Engineering, UH M&#257;noa &mdash; expected May 2029</li>
+          <li>Undergraduate researcher on L-MAPS, a NASA Artemis flight instrument (HSFL &times; JPL)</li>
+          <li>Built and calibrated a working microwave radiometer that measured the Sun</li>
+          <li>NASA RASC-AL top-14 finalist &middot; URC rover comms lead &middot; cleanroom fabrication</li>
+          <li>Funded by the NASA Hawai&#699;i Space Grant Consortium</li>
+        </ul>
+      </div>
+      <div class="resume-side">
+        <a class="btn primary" href="Alexis_Chong_Resume.pdf" download>Download resume (PDF)</a>
+        <span class="mono">one page &middot; updated Jul 2026</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="photos">
+    <div class="sec-eyebrow">04 &middot; Ground truth</div>
+    <h2>Photos</h2>
+    <p class="sec-note">Dishes, rovers, cleanroom bunny suits, and the occasional summit.</p>
+    <div class="gallery">
+      <figure class="shot" data-need="images/gallery-1.jpg"><img src="images/gallery-1.jpg" alt="Photo 1" onerror="this.parentElement.classList.add('empty');this.remove()"></figure>
+      <figure class="shot" data-need="images/gallery-2.jpg"><img src="images/gallery-2.jpg" alt="Photo 2" onerror="this.parentElement.classList.add('empty');this.remove()"></figure>
+      <figure class="shot" data-need="images/gallery-3.jpg"><img src="images/gallery-3.jpg" alt="Photo 3" onerror="this.parentElement.classList.add('empty');this.remove()"></figure>
+      <figure class="shot" data-need="images/gallery-4.jpg"><img src="images/gallery-4.jpg" alt="Photo 4" onerror="this.parentElement.classList.add('empty');this.remove()"></figure>
+      <figure class="shot" data-need="images/gallery-5.jpg"><img src="images/gallery-5.jpg" alt="Photo 5" onerror="this.parentElement.classList.add('empty');this.remove()"></figure>
+      <figure class="shot" data-need="images/gallery-6.jpg"><img src="images/gallery-6.jpg" alt="Photo 6" onerror="this.parentElement.classList.add('empty');this.remove()"></figure>
+    </div>
+  </section>
+
+  <section id="offduty">
+    <div class="sec-eyebrow">05 &middot; Off duty</div>
+    <h2>When the dish is parked</h2>
+    <p class="sec-note">The parts of life that don't fit on a resume.</p>
+    <div class="fun-grid">
+      <div class="fun">
+        <div class="emoji">&#9968;&#65039;</div>
+        <h3>Hiking</h3>
+        <p>Hawai&#699;i ridgelines and summit trails &mdash; the same mountains the observatories picked, for the same reason: the view.</p>
+      </div>
+      <div class="fun">
+        <div class="emoji">&#127928;</div>
+        <h3>Guitar &amp; songwriting</h3>
+        <p>I play guitar and write songs &mdash; including co-writing an original (I claim the chorus). Signal processing, but make it art.</p>
+      </div>
+      <div class="fun">
+        <div class="emoji">&#128218;</div>
+        <h3>The bookshelf</h3>
+        <ul>
+          <!-- swap these placeholders for your real favorites -->
+          <li>Your favorite book here</li>
+          <li>Another one here</li>
+          <li>Currently reading: ...</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="contact-card">
+      <div>
+        <h2>Point your antenna this way.</h2>
+        <p>Open to internships and research collaborations in RF hardware, instrumentation, and space systems.</p>
+      </div>
+      <a class="btn primary" href="mailto:alexischong07@gmail.com">alexischong07@gmail.com</a>
+    </div>
+  </section>
+
+  <footer>
+    <div>&copy; 2026 Alexis Chong &middot; Built in Honolulu</div>
+    <div class="mono">21.3&deg;N 157.8&deg;W &middot; clear skies preferred</div>
+  </footer>
+
+</main>
+
+<script>
+  // The moon grows as you scroll away from the top — "it expands from there."
+  (function(){
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduce) return;
+    var moon = document.getElementById('moon');
+    function onScroll(){
+      var s = Math.min(window.scrollY / window.innerHeight, 1.2);
+      moon.style.setProperty('--moonscale', (1 + s * 0.45).toFixed(3));
+    }
+    window.addEventListener('scroll', onScroll, {passive:true});
+    onScroll();
+  })();
+</script>
+</body>
+</html>
