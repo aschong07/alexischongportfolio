@@ -1,8 +1,0 @@
-{
-  "permissions": {
-    "allow": [
-      "Bash(grep -a -o -E \"[A-Za-z]:[\\\\\\\\\\\\\\\\/][^\\\\\"]*alexis[a-zA-Z]*portfolio[^\\\\\"]*\" \"/c/Users/alexi/AppData/Roaming/GitHub Desktop/IndexedDB\" -r)",
-      "Bash(powershell -NoProfile -Command \"Compress-Archive -Path 'alexischongportfolio' -DestinationPath 'alexischongportfolio-backup.zip' -Force\")"
-    ]
-  }
-}
