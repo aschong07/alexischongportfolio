@@ -47,7 +47,7 @@
   .nav-links a:hover{color:var(--moonlight)}
 
   /* ---------- hero: the moon ---------- */
-  header{position:relative;z-index:1;min-height:92vh;display:flex;flex-direction:column;justify-content:center;overflow:hidden}
+  header{position:relative;z-index:1;min-height:92vh;display:flex;flex-direction:column;justify-content:center;overflow:hidden;background:#000000}
   .moon {
     position: absolute;
     left: 50%;
@@ -140,10 +140,17 @@
     70%{transform:translate(40px,-120px) rotate(10deg) scale(1.16);opacity:0.8}
     100%{transform:translate(120px,-280px) rotate(15deg) scale(1.3);opacity:0}
   }
-  .eyebrow{font-family:'IBM Plex Mono',monospace;font-size:.78rem;letter-spacing:.16em;color:var(--cold);text-transform:uppercase;font-weight:600}
-  h1{font-size:clamp(2.7rem,7.5vw,5rem);font-weight:700;letter-spacing:-.02em;line-height:1.04;margin:16px auto 18px;max-width:860px;color:var(--moonlight)}
-  h1 .glow{color:var(--cold);text-shadow:0 0 26px rgba(219, 39, 119, 0.18)}
-  .tagline{max-width:620px;margin:0 auto;color:var(--moonlight);font-size:1.06rem;font-weight:700}
+  .eyebrow{font-family:'IBM Plex Mono',monospace;font-size:.78rem;letter-spacing:.16em;color:#ff5fb8;text-transform:uppercase;font-weight:600}
+  h1{font-size:clamp(2.7rem,7.5vw,5rem);font-weight:700;letter-spacing:-.02em;line-height:1.04;margin:16px auto 18px;max-width:860px;color:#ffffff}
+  h1 .glow{
+    color:#ff3fb0;
+    text-shadow:
+      0 0 8px rgba(255,63,176,0.95),
+      0 0 18px rgba(255,63,176,0.8),
+      0 0 36px rgba(255,63,176,0.6),
+      0 0 64px rgba(255,63,176,0.4);
+  }
+  .tagline{max-width:620px;margin:0 auto;color:#ffffff;font-size:1.06rem;font-weight:700}
   .hero-ctas{margin-top:30px;display:flex;gap:14px;justify-content:center;flex-wrap:wrap;align-items:center}
 
   .btn{
@@ -156,7 +163,7 @@
   .btn:hover{transform:translateY(-2px);border-color:var(--cold);box-shadow: 0 4px 12px rgba(219, 39, 119, 0.12)}
   .btn.primary{background:var(--solar);border-color:var(--solar);color:#ffffff}
   .btn.primary:hover{background:#9d174d;border-color:#9d174d;box-shadow: 0 4px 12px rgba(33, 37, 41, 0.15)}
-  .scroll-hint{position:relative;z-index:2;text-align:center;margin-top:8vh;color:var(--dust);font-family:'IBM Plex Mono',monospace;font-size:.75rem;letter-spacing:.14em}
+  .scroll-hint{position:relative;z-index:2;text-align:center;margin-top:8vh;color:rgba(255,255,255,0.55);font-family:'IBM Plex Mono',monospace;font-size:.75rem;letter-spacing:.14em}
 
   /* ---------- sections ---------- */
   main{position:relative;z-index:1;display:flex;flex-direction:column}
@@ -242,13 +249,13 @@
   .resume-side .mono{display:block;color:var(--dust);font-size:.78rem;margin-top:12px}
 
   /* ---------- gallery ---------- */
+  .gallery-wrap{position:relative}
   .gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
   .gallery figure{background:#ffffff;border:1px solid var(--line);border-radius:12px;overflow:hidden;box-shadow: 0 4px 15px rgba(33, 37, 41, 0.05)}
   .gallery figure img{display:block;width:100%;height:220px;object-fit:cover}
   .gallery figcaption{padding:12px 14px;font-family:'IBM Plex Mono',monospace;font-size:.76rem;color:var(--dust);line-height:1.5}
 
   /* ---------- off duty ---------- */
-  .offduty-container{position:relative}
   .fun-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;position:relative;z-index:2}
   .fun{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:28px 26px;position:relative;box-shadow: 0 4px 20px rgba(33, 37, 41, 0.03)}
   .fun .emoji{font-size:1.7rem}
@@ -264,12 +271,13 @@
   /* Floating Astronaut Integration */
   .floating-astronaut {
     position: absolute;
-    left: -10px;
-    top: -120px;
-    width: 200px;
+    left: -36px;
+    top: -36px;
+    width: 150px;
     height: auto;
     pointer-events: none;
     z-index: 10;
+    filter: drop-shadow(0 14px 24px rgba(33,37,41,0.18));
     animation: floatAstronaut 8s ease-in-out infinite;
   }
   @keyframes floatAstronaut {
@@ -279,9 +287,9 @@
   }
   @media (max-width: 900px) {
     .floating-astronaut {
-      width: 130px;
-      top: -90px;
-      left: 10px;
+      width: 100px;
+      top: -20px;
+      left: -14px;
     }
   }
 
@@ -521,6 +529,8 @@
     <div class="sec-eyebrow">05 &middot; Ground truth</div>
     <h2>Photos</h2>
     <p class="sec-note">Some of the moments that aren’t always obvious from the résumé.</p>
+    <div class="gallery-wrap">
+    <img src="Astronaut.png" class="floating-astronaut" alt="Astronaut floating over the photo gallery" onerror="this.parentElement.classList.add('empty');this.remove()">
     <div class="gallery">
       <figure><img src="Random Images Team Petal.webp" alt="Team Petal" onerror="this.closest('figure').remove()"><figcaption>Team PETAL</figcaption></figure>
       <figure><img src="Random Images Hawaii Annual Code Challenge.png" alt="Hawaii Annual Code Challenge" onerror="this.closest('figure').remove()"><figcaption>At the Hawai&#699;i Annual Code Challenge</figcaption></figure>
@@ -535,10 +545,10 @@
       <figure><img src="FPGA Verilog board coding.webp" alt="Coding an FPGA dev board in Verilog" onerror="this.closest('figure').remove()"><figcaption>Coding an FPGA board in Verilog</figcaption></figure>
       <figure><img src="RC car electronics help.webp" alt="Wiring up a small RC car's electronics as a favor for a friend" onerror="this.closest('figure').remove()"><figcaption>Helping a friend wire up an RC car</figcaption></figure>
     </div>
+    </div>
   </section>
 
-  <section id="offduty" class="offduty-container">
-    <img src="Astronaut.png" class="floating-astronaut" alt="Astronaut relaxing near the off duty section" onerror="this.parentElement.classList.add('empty');this.remove()">
+  <section id="offduty">
     <div class="sec-eyebrow">06 &middot; Off duty</div>
     <h2>When the dish is parked</h2>
     <p class="sec-note">A few things outside the lab that still shape the way I show up to it.</p>
