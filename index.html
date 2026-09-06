@@ -91,7 +91,7 @@
   .profile-gadgets{position:absolute;inset:0;pointer-events:none}
   .gadget{position:absolute;width:140px;height:140px;border-radius:12px;border:none;background:transparent;box-shadow:none;display:flex;align-items:center;justify-content:center;text-align:center;padding:6px;font-family:'IBM Plex Mono',monospace;font-size:.82rem;color:var(--dust);transition:transform .25s ease,box-shadow .25s ease;pointer-events:auto;animation:floatGadget 7s ease-in-out infinite alternate;}
   .gadget:hover{transform:translateY(-6px) scale(1.05);box-shadow:0 24px 40px rgba(33,37,41,0.12)}
-  .gadget:nth-child(1){top:8%;left:-16%}
+  .gadget:nth-child(1){top:8%;left:-120px}
   .gadget:nth-child(2){top:6%;right:-4%}
   .gadget:nth-child(3){bottom:12%;left:4%}
   .gadget:nth-child(4){bottom:12%;right:-12%}
@@ -307,6 +307,9 @@
     .nav-links{display:none}
     .also-row{grid-template-columns:1fr}
     .moon{width:130vw;bottom:-58vw}
+    .hero-profile{grid-template-columns:1fr}
+    .profile-photo{min-height:320px}
+    .profile-gadgets{display:none}
   }
 </style>
 </head>
@@ -364,8 +367,8 @@
             <path d="M13 4.5H11v15h2v-15z" fill="#db2777"/>
           </svg>
         </div>
-        <div class="gadget" title="Sensors">
-          <img src="Sensors.png" alt="Sensors" style="width:90%;height:auto;object-fit:cover;filter:drop-shadow(0 6px 10px rgba(0,0,0,0.25))">
+        <div class="gadget" title="PCB">
+          <img src="PCB gadget.jpg" alt="PCB" style="width:90%;height:auto;object-fit:cover;filter:drop-shadow(0 6px 10px rgba(0,0,0,0.25))">
         </div>
         <div class="gadget" title="Rocket">
           <img src="Rocket.png" alt="Rocket" style="width:90%;height:auto;object-fit:cover;filter:drop-shadow(0 6px 10px rgba(0,0,0,0.25))">
