@@ -6,7 +6,7 @@
 <title>Alexis Chong</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Caveat:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root{
     --space:#020917;        /* deep space background */
@@ -37,17 +37,6 @@
   a:focus-visible{outline:3px solid var(--solar);outline-offset:3px}
   .mono{font-family:'IBM Plex Mono',monospace}
   .wrap{max-width:1080px;margin:0 auto;padding:0 22px}
-
-  /* Handwritten/Human margin notes */
-  .handwritten {
-    font-family: 'Caveat', cursive;
-    color: var(--cold);
-    font-size: 1.35rem;
-    font-weight: 700;
-    letter-spacing: 0;
-    display: inline-block;
-    line-height: 1.2;
-  }
 
   /* ---------- starfield (subtle celestial dust in light mode) ---------- */
   .stars,.stars2{position:fixed;inset:0;pointer-events:none;z-index:0}
@@ -188,18 +177,6 @@
     transition: color .25s ease, opacity .25s ease;
   }
   .hero-ctas{margin-top:30px;display:flex;gap:14px;justify-content:center;flex-wrap:wrap;align-items:center}
-  
-  .hero-note {
-    position: absolute;
-    right: 15%;
-    top: 55%;
-    transform: rotate(6deg);
-    max-width: 150px;
-    text-align: left;
-  }
-  @media (max-width: 1024px) {
-    .hero-note { display: none; }
-  }
 
   .btn{
     display:inline-block;padding:12px 22px;border-radius:999px;text-decoration:none;
@@ -214,7 +191,15 @@
   .scroll-hint{position:relative;z-index:2;text-align:center;margin-top:8vh;color:var(--dust);font-family:'IBM Plex Mono',monospace;font-size:.75rem;letter-spacing:.14em}
 
   /* ---------- sections ---------- */
-  main{position:relative;z-index:1}
+  main{position:relative;z-index:1;display:flex;flex-direction:column}
+  #about{order:1}
+  #work{order:2}
+  #experience{order:3}
+  #projects{order:4}
+  #resume{order:5}
+  #photos{order:6}
+  #offduty{order:7}
+  #contact{order:8}
   section{padding:86px 0 20px}
   .sec-eyebrow{font-family:'IBM Plex Mono',monospace;font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;color:var(--cold);font-weight:600}
   h2{font-size:2rem;font-weight:700;letter-spacing:-.01em;margin:8px 0 6px;color:var(--moonlight)}
@@ -266,6 +251,8 @@
   .cardp .feat-body{padding:24px}
   .cardp h3{font-size:1.1rem}
   .cardp p{font-size:.92rem}
+  .detail-link{display:inline-block;margin-top:18px;font-family:'IBM Plex Mono',monospace;font-size:.78rem;text-decoration:none;color:var(--cold)}
+  .detail-link:hover{text-decoration:underline}
 
   .also{margin-top:38px;border-top:1px solid var(--line)}
   .also-row{display:grid;grid-template-columns:1fr auto;gap:8px;padding:18px 4px;border-bottom:1px solid var(--line);align-items:baseline}
@@ -304,13 +291,6 @@
   .hiking-pics .shot{min-height:110px;border-radius:8px;border:1px solid var(--line)}
   .hiking-pics .shot.empty::after{font-size:.65rem;padding:8px}
 
-  .shelf-note {
-    position: absolute;
-    bottom: -15px;
-    right: 15px;
-    transform: rotate(-3deg);
-  }
-
   /* Floating Astronaut Integration */
   .floating-astronaut {
     position: absolute;
@@ -336,13 +316,9 @@
   }
 
   /* ---------- contact/footer ---------- */
-  .contact-card{
-    background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
-    padding:46px 40px;display:flex;flex-wrap:wrap;gap:26px;align-items:center;justify-content:space-between;
-    box-shadow: 0 10px 40px rgba(2, 132, 199, 0.04);
-  }
+  .contact-card{padding:46px 0;display:flex;flex-wrap:wrap;gap:26px;align-items:center;justify-content:space-between}
   .contact-card p{color:var(--dust);max-width:460px;margin-top:8px}
-  footer{padding:44px 0 50px;color:var(--dust);font-size:.84rem;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
+  footer{order:9;padding:44px 0 50px;color:var(--dust);font-size:.84rem;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
 
   @media (max-width:820px){
     .feature,.feature:nth-of-type(even){grid-template-columns:1fr}
@@ -365,6 +341,7 @@
     <a class="nav-name" href="#top">Alexis Chong</a>
     <div class="nav-links">
       <a href="#work">Work</a>
+      <a href="#experience">Roles</a>
       <a href="#projects">Projects</a>
       <a href="#resume">Resume</a>
       <a href="#photos">Photos</a>
@@ -436,6 +413,7 @@
         <div class="tag">NASA Artemis &middot; Hawai&#699;i Space Flight Laboratory</div>
         <h3>L-MAPS — Lunar Heat Flow Radiometer</h3>
         <p>I’m helping support a flight instrument for Artemis-era lunar science, mostly by working through RF parts, vendor details, and the kind of mission planning that keeps a hardware build grounded.</p>
+        <a class="detail-link" href="l-maps.html">Explore the L-MAPS work &rarr;</a>
         <div class="facts">
           <span class="fact">RF hardware</span>
           <span class="fact">JPL collaboration</span>
@@ -452,6 +430,7 @@
         <div class="tag cold">HIGP &middot; Student observatory</div>
         <h3>Ground-based microwave radiometer</h3>
         <p>I put together a 1.2 m radiometer using an LNB, SDR, Raspberry Pi, and a Python pipeline, then calibrated it enough to measure the Sun at roughly 10,000 K. It’s been one of the most satisfying hands-on builds I’ve done.</p>
+        <a class="detail-link" href="microwave-radiometer.html">See the radiometer build &rarr;</a>
         <div class="facts">
           <span class="fact">Python pipeline</span>
           <span class="fact">Sun measurement</span>
@@ -462,60 +441,8 @@
     </article>
   </section>
 
-  <section id="projects">
-    <div class="sec-eyebrow">02 &middot; Sky survey</div>
-    <h2>Projects</h2>
-    <p class="sec-note">A few bigger pushes that shaped how I work across interdisciplinary engineering.</p>
-
-    <div class="grid">
-      <article class="cardp">
-        <figure class="shot">
-          <img src="Team Petal.webp" alt="Project PETAL team" onerror="this.parentElement.classList.add('empty');this.remove()">
-        </figure>
-        <div class="feat-body">
-          <div class="tag">NASA RASC-AL &middot; Finalist</div>
-          <h3>Project PETAL</h3>
-          <p>Top-14 finalist nationally, focused on lunar habitat power architecture and thermal modeling for a crewed surface mission concept.</p>
-        </div>
-      </article>
-
-      <article class="cardp">
-        <figure class="shot">
-          <img src="Rover Comms.webp" alt="Rover communications" onerror="this.parentElement.classList.add('empty');this.remove()">
-        </figure>
-        <div class="feat-body">
-          <div class="tag cold">University Rover Challenge</div>
-          <h3>Rover comms &amp; avionics</h3>
-          <p>Designed a dual-band telemetry architecture for long-range rover operations, helping the team reach a top-38 global finish.</p>
-        </div>
-      </article>
-
-      <article class="cardp">
-        <figure class="shot">
-          <img src="Semiconductor Fabrication.webp" alt="Semiconductor fabrication" style="object-position:center 18%;transform:translateY(-8px) scale(1.02);" onerror="this.parentElement.classList.add('empty');this.remove()">
-        </figure>
-        <div class="feat-body">
-          <div class="tag cold">UH M&#257;noa cleanroom</div>
-          <h3>Semiconductor fabrication</h3>
-          <p>Worked in photolithography and thermal evaporation to fabricate sensors and OLED structures while learning the fundamentals of thin-film process control.</p>
-        </div>
-      </article>
-
-      <article class="cardp">
-        <figure class="shot">
-          <img src="AEFLES.png" alt="AEFLES system" style="object-position:center 18%;transform:translateY(-8px) scale(1.02);" onerror="this.parentElement.classList.add('empty');this.remove()">
-        </figure>
-        <div class="feat-body">
-          <div class="tag">Grant-funded &middot; project lead</div>
-          <h3>AEFLES strain sensing</h3>
-          <p>Led a funded build of a real-time structural strain sensing system with embedded sensing and simulation work in Python and Julia.</p>
-        </div>
-      </article>
-    </div>
-  </section>
-
   <section id="experience">
-    <div class="sec-eyebrow">03 &middot; Experience</div>
+    <div class="sec-eyebrow">02 &middot; Experience</div>
     <h2>Roles &amp; leadership</h2>
     <p class="sec-note">The everyday work that makes the bigger systems possible.</p>
     <div class="also">
@@ -531,6 +458,74 @@
         <div><strong>Robotic Technician Intern, DLIR</strong><span>Improved machining outcomes through calibration and precision part design.</span></div>
         <div class="mono">2024–2025</div>
       </div>
+    </div>
+  </section>
+
+  <section id="projects">
+    <div class="sec-eyebrow">03 &middot; Sky survey</div>
+    <h2>Projects</h2>
+    <p class="sec-note">A few bigger pushes that shaped how I work across interdisciplinary engineering.</p>
+
+    <div class="grid">
+      <article class="cardp">
+        <figure class="shot">
+          <img src="Team Petal.webp" alt="Project PETAL team" onerror="this.parentElement.classList.add('empty');this.remove()">
+        </figure>
+        <div class="feat-body">
+          <div class="tag">NASA RASC-AL &middot; Finalist</div>
+          <h3>Project PETAL</h3>
+          <p>Top-14 finalist nationally, focused on lunar habitat power architecture and thermal modeling for a crewed surface mission concept.</p>
+          <a class="detail-link" href="project-petal.html">Explore Project PETAL &rarr;</a>
+        </div>
+      </article>
+
+      <article class="cardp">
+        <figure class="shot">
+          <img src="Rover Comms.webp" alt="Rover communications" onerror="this.parentElement.classList.add('empty');this.remove()">
+        </figure>
+        <div class="feat-body">
+          <div class="tag cold">University Rover Challenge</div>
+          <h3>Rover Communications &amp; Avionics Lead</h3>
+          <p>I lead the communications and avionics subsystem for Team RoSE: a dual-band 900&nbsp;MHz / 2.4&nbsp;GHz telemetry link, and the power and data architecture that runs the whole rover. The team finished top-38 globally.</p>
+          <a class="detail-link" href="rover-comms-avionics.html">Explore rover comms &amp; avionics &rarr;</a>
+        </div>
+      </article>
+
+      <article class="cardp">
+        <figure class="shot">
+          <img src="Semiconductor Fabrication.webp" alt="Semiconductor fabrication" style="object-position:center 18%;transform:translateY(-8px) scale(1.02);" onerror="this.parentElement.classList.add('empty');this.remove()">
+        </figure>
+        <div class="feat-body">
+          <div class="tag cold">UH M&#257;noa cleanroom</div>
+          <h3>Semiconductor fabrication</h3>
+          <p>Worked in photolithography and thermal evaporation to fabricate sensors and OLED structures while learning the fundamentals of thin-film process control.</p>
+          <a class="detail-link" href="semiconductor-fabrication.html">Explore semiconductor fabrication &rarr;</a>
+        </div>
+      </article>
+
+      <article class="cardp">
+        <figure class="shot">
+          <img src="AEFLES.png" alt="Receiving the grant award that funded the AEFLES project" style="object-position:center 18%;transform:translateY(-8px) scale(1.02);" onerror="this.parentElement.classList.add('empty');this.remove()">
+        </figure>
+        <div class="feat-body">
+          <div class="tag">Grant-funded &middot; project lead</div>
+          <h3>AEFLES strain sensing</h3>
+          <p>Led a funded build of a real-time structural strain sensing system with embedded sensing and simulation work in Python and Julia.</p>
+          <a class="detail-link" href="aefles-strain-sensing.html">Explore AEFLES &rarr;</a>
+        </div>
+      </article>
+
+      <article class="cardp">
+        <figure class="shot">
+          <img src="Team Hokulele final presentation.webp" alt="Team Hokulele" onerror="this.parentElement.classList.add('empty');this.remove()">
+        </figure>
+        <div class="feat-body">
+          <div class="tag">Team H&#333;k&#363;lele &middot; Rocketry</div>
+          <h3>Flight computers &amp; ground station</h3>
+          <p>Testing onboard flight computers and running a Yagi-antenna ground station for a two-stage high-power rocket headed to the FAR-Unlimited competition.</p>
+          <a class="detail-link" href="team-hokulele.html">Explore Team H&#333;k&#363;lele &rarr;</a>
+        </div>
+      </article>
     </div>
   </section>
 
@@ -564,14 +559,20 @@
       <figure class="shot"><img src="Random Images Hawaii Annual Code Challenge.png" alt="Hawaii Annual Code Challenge" onerror="this.parentElement.classList.add('empty');this.remove()"></figure>
       <figure class="shot"><img src="Random Images Up on Lanikai.webp" alt="Lanikai" onerror="this.parentElement.classList.add('empty');this.remove()"></figure>
       <figure class="shot"><img src="Random Images Teaching a Class.webp" alt="Teaching a class" onerror="this.parentElement.classList.add('empty');this.remove()"></figure>
-      <figure class="shot"><img src="Random Images Transporting the Rover.webp" alt="Transporting the rover" onerror="this.parentElement.classList.add('empty');this.remove()"></figure>
+      <figure class="shot"><img src="Random Images Transporting the Rover.webp" alt="Packing and transporting the rover" onerror="this.parentElement.classList.add('empty');this.remove()"></figure>
+      <figure class="shot"><img src="FabLab Monitoring.webp" alt="Monitoring a shift in the UH M&#257;noa FabLab" onerror="this.parentElement.classList.add('empty');this.remove()"></figure>
+      <figure class="shot"><img src="Rover packing.webp" alt="Packing the rover for competition" onerror="this.parentElement.classList.add('empty');this.remove()"></figure>
+      <figure class="shot"><img src="Team RoSE recruitment meeting.jpg" alt="Team RoSE recruitment meeting" onerror="this.parentElement.classList.add('empty');this.remove()"></figure>
       <figure class="shot">
-        <video controls preload="metadata" poster="Random Images Launching a ROCKET!.mp4" style="width:100%;height:100%;object-fit:cover">
+        <video controls preload="metadata" style="width:100%;height:100%;object-fit:cover">
           <source src="Random Images Launching a ROCKET!.mp4" type="video/mp4">
-          <source src="Random Images Launching a ROCKET!.mov" type="video/quicktime">
           Your browser does not support the video tag.
         </video>
       </figure>
+      <figure class="shot"><img src="Team at Hawaii Annual Code Challenge.webp" alt="The team at the Hawaii Annual Code Challenge" onerror="this.parentElement.classList.add('empty');this.remove()"></figure>
+      <figure class="shot"><img src="Working on Hawaii Annual Code Challenge.webp" alt="Working through a problem at the Hawaii Annual Code Challenge" onerror="this.parentElement.classList.add('empty');this.remove()"></figure>
+      <figure class="shot"><img src="FPGA Verilog board coding.webp" alt="Coding an FPGA dev board in Verilog" onerror="this.parentElement.classList.add('empty');this.remove()"></figure>
+      <figure class="shot"><img src="RC car electronics help.webp" alt="Wiring up a small RC car's electronics as a favor for a friend" onerror="this.parentElement.classList.add('empty');this.remove()"></figure>
     </div>
   </section>
 
@@ -593,12 +594,12 @@
       <div class="fun">
         <div class="emoji">🎸</div>
         <h3>Guitar</h3>
-        <p>Music is my reset button. “Blackbird” is still one of my favorite songs to learn and play.</p>
+        <p>I love playing the guitar in my free time when I’m not doing anything else.</p>
       </div>
       <div class="fun">
         <div class="emoji">🏖️</div>
         <h3>The beach</h3>
-        <p>My favorite beach is jumping off Alan Davis. I’m happiest when the water’s calm, the sun’s out, and I can just stay there for a while.</p>
+        <p>As a Hawai&#699;i local, I love going to the beach after a long week. It’s nice to get outside and appreciate the sun.</p>
       </div>
     </div>
   </section>
@@ -606,7 +607,7 @@
   <section id="contact">
     <div class="contact-card">
       <div>
-        <h2>Point your antenna this way.</h2>
+        <h2>Let’s build something that works.</h2>
         <p>If you’re working on RF systems, instrumentation, or space hardware, I’d love to talk.</p>
       </div>
       <a class="btn primary" href="mailto:alexischong07@gmail.com">alexischong07@gmail.com</a>

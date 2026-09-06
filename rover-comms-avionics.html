@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rover Communications &amp; Avionics | Alexis Chong</title>
+<meta name="description" content="Leading the communications and avionics subsystem for Team RoSE's University Rover Challenge rover — dual-band telemetry, power distribution, and onboard data architecture.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="project.css">
+</head>
+<body>
+
+<nav>
+  <div class="nav-in">
+    <a class="nav-name" href="index.html">Alexis Chong</a>
+    <a class="nav-back" href="index.html#projects">&larr; Back to portfolio</a>
+  </div>
+</nav>
+
+<main class="wrap">
+  <div class="p-hero">
+    <div class="eyebrow">University Rover Challenge &middot; Team RoSE</div>
+    <h1>Rover Communications &amp; Avionics Lead</h1>
+    <p class="lede">I lead the subsystem that keeps our Mars rover talking and powered: a dual-band radio link back to the ground station, and the power and data architecture that every other subsystem plugs into.</p>
+
+    <dl class="meta">
+      <div><dt>Role</dt><dd>Comms &amp; Avionics Lead</dd></div>
+      <div><dt>Team</dt><dd>Team RoSE, UH M&#257;noa</dd></div>
+      <div><dt>Competition</dt><dd>University Rover Challenge</dd></div>
+      <div><dt>Result</dt><dd>Top-38 globally</dd></div>
+    </dl>
+
+    <img class="hero-img contain" src="Rover 3D model.png" alt="CAD model of the rover: four-wheel chassis, manipulator arm, and the mast carrying the communications antennas">
+  </div>
+
+  <section>
+    <h2>What the subsystem has to do</h2>
+    <p>The University Rover Challenge runs in open desert terrain, and the rover has to be driven entirely from a ground station that can be hundreds of meters away with no line-of-sight guarantee. That puts two hard requirements on my subsystem: the link can never be the reason we lose the rover, and every board, motor, and camera on the vehicle has to get clean power and a data path back to the onboard computer.</p>
+    <p>So the work splits into two halves that have to agree with each other — the <strong>radio link</strong> that carries video and commands, and the <strong>avionics</strong> that distribute power and data inside the chassis. I own both, which means most of my job is making sure a decision on one side doesn't quietly break the other.</p>
+    <div class="facts">
+      <span class="fact">900 MHz / 2.4 GHz</span>
+      <span class="fact">Ubiquiti Rocket radios</span>
+      <span class="fact">Jetson AGX Xavier</span>
+      <span class="fact">PoE distribution</span>
+      <span class="fact">6 camera feeds</span>
+    </div>
+  </section>
+
+  <section>
+    <h2>The communications architecture</h2>
+    <p class="sec-note">A dual-band link, deliberately split so that losing one band doesn't mean losing the rover.</p>
+    <p>The ground station computers sit behind a router that feeds two radios through a PoE injector: a <strong>Rocket M900</strong> on 900&nbsp;MHz and a <strong>Rocket M2</strong> on 2.4&nbsp;GHz. Each drives its own cross-sectional antenna aimed downrange. On the rover, matching omni-directional antennas feed a second pair of Rocket radios, which land on an onboard PoE switch shared by the Jetson and the Raspberry Pi.</p>
+    <p>The two bands do different jobs. <strong>2.4&nbsp;GHz</strong> carries the bandwidth — camera feeds and everything the driver needs to see. <strong>900&nbsp;MHz</strong> carries less data but propagates far better through terrain and vegetation, so it's the band that keeps commands and telemetry flowing when the high-rate link degrades. The omni-directional antennas on the rover matter for the same reason: the rover turns constantly, and it can't be responsible for keeping itself pointed at the ground station.</p>
+
+    <figure class="figblock">
+      <img src="Rover comms diagram.png" alt="Block diagram of the rover communications chain from ground station computers through the router, PoE injector, and Rocket M900 and M2 radios, across the 900 MHz and 2.4 GHz antenna links, to the onboard PoE switch, Jetson Xavier, and Raspberry Pi">
+      <figcaption>Communications block diagram. Ground station on the left, rover on the right, with the two RF hops in the middle. Black is Ethernet, blue is coaxial, dotted is the wireless link, and red is power — keeping those four separated on the drawing is what makes it useful during field debugging.</figcaption>
+    </figure>
+  </section>
+
+  <section>
+    <h2>The avionics and power architecture</h2>
+    <p class="sec-note">One battery, several voltage rails, and a lot of things that all want to be the priority.</p>
+    <p>Everything on the rover runs off a single <strong>100&nbsp;A battery</strong> through a central electric power system that breaks out the rails each load needs — 12&nbsp;V to the motor controllers, 15&nbsp;V to the Jetson, and 5&nbsp;V to the servos and logic. The <strong>Jetson AGX Xavier</strong> is the main compute; a USB hub aggregates six camera feeds into it, and a pair of Arduinos handle low-level I/O with the second one carried as a backup.</p>
+    <p>Actuation is where the current goes. Four <strong>Spark Flex</strong> controllers drive the wheels, two <strong>Spark Max</strong> controllers run the REV NEO arm motors, three more flex controllers live on the arm itself, and two <strong>RoboClaw 2×15&nbsp;A</strong> controllers handle the payload servos. The science payload and the LED status mast hang off the same tree.</p>
+    <p>The rule I've held to across the whole harness is that <strong>power and data never share a run</strong>: 12&nbsp;AWG for power, 24/26&nbsp;AWG for data, colour-coded and documented, so that when something misbehaves in the field we can trace it without pulling the rover apart.</p>
+
+    <figure class="figblock">
+      <img src="Rover wiring diagram.png" alt="Full rover wiring diagram showing the battery and electric power system feeding motor controllers, the Jetson AGX, USB hub, cameras, Arduinos, servos, and LED payload, with power and data runs colour-coded">
+      <figcaption>The full avionics harness. Red is power at 12&nbsp;AWG, purple is data at 24/26&nbsp;AWG. This drawing is the reference the whole team builds and debugs against, so it gets updated the same day anything on the rover changes.</figcaption>
+    </figure>
+  </section>
+
+  <section>
+    <h2>What I learned building it</h2>
+    <ul class="bullets">
+      <li><strong>Redundancy has to be designed in, not added later.</strong> Splitting bands only helps if the system genuinely degrades gracefully onto the surviving one — that's an architecture decision made at the start, not a patch.</li>
+      <li><strong>The documentation is part of the hardware.</strong> A wiring diagram that's a week out of date is worse than none, because people trust it. Keeping these drawings current is most of what makes the subsystem maintainable by anyone but me.</li>
+      <li><strong>Field conditions are the real spec.</strong> Bench performance told us very little about what the link would do across desert terrain with the rover moving and turning.</li>
+      <li><strong>Leading a subsystem is mostly interfaces.</strong> Most of my time goes to the boundaries with the mechanical, arm, and software teams, making sure what I promised them is what they actually get.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Gallery</h2>
+    <p class="sec-note">The parts of the work that don't show up in a block diagram.</p>
+    <div class="gallery">
+      <figure>
+        <img src="Rover packing.webp" alt="The rover partially disassembled on the shop floor with wheels, chassis, and crate during packing">
+        <figcaption>Packing for competition — wheels off, chassis open, and a crate built to get it there in one piece.</figcaption>
+      </figure>
+      <figure>
+        <img src="Rover Comms.webp" alt="Rover communications hardware">
+        <figcaption>Comms hardware during integration.</figcaption>
+      </figure>
+      <figure>
+        <img src="Random Images Transporting the Rover.webp" alt="The team transporting the rover">
+        <figcaption>Moving the rover between the lab and the test site.</figcaption>
+      </figure>
+      <figure>
+        <img src="Team RoSE recruitment meeting.jpg" alt="Team RoSE recruitment meeting in a lecture hall">
+        <figcaption>Recruitment night. Bringing new members onto the subsystem is part of the role too.</figcaption>
+      </figure>
+      <figure>
+        <img src="Rover avionics workspace.webp" alt="The avionics workbench used to build and repair the rover's power and data harness">
+        <figcaption>The avionics bench, where the harness comes together.</figcaption>
+      </figure>
+      <figure>
+        <img src="Rover power distribution wiring.webp" alt="Inside the rover's power distribution box, showing the battery management wiring and terminal blocks">
+        <figcaption>Inside the power distribution box — the wiring that turns one battery into the rails every subsystem needs.</figcaption>
+      </figure>
+      <figure>
+        <img src="Rover battery pack.webp" alt="The rover's custom battery pack with a battery management board and terminal blocks">
+        <figcaption>The battery pack and its management board.</figcaption>
+      </figure>
+      <figure>
+        <img src="Rover comms field testing.webp" alt="Field testing the rover with its communications mast raised">
+        <figcaption>Field testing the comms mast before competition.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <div class="p-foot">
+    <a class="btn primary" href="index.html#projects">&larr; All projects</a>
+    <span class="mono">Team RoSE &middot; University of Hawai&#699;i at M&#257;noa</span>
+  </div>
+</main>
+
+</body>
+</html>

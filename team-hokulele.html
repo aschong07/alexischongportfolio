@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Team H&#333;k&#363;lele | Alexis Chong</title>
+<meta name="description" content="Flight computer testing and Yagi-antenna ground station work for Team Hōkūlele's two-stage high-power rocket, headed to the FAR-Unlimited competition.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="project.css">
+</head>
+<body>
+
+<nav>
+  <div class="nav-in">
+    <a class="nav-name" href="index.html">Alexis Chong</a>
+    <a class="nav-back" href="index.html#projects">&larr; Back to portfolio</a>
+  </div>
+</nav>
+
+<main class="wrap">
+  <div class="p-hero">
+    <div class="eyebrow">Team H&#333;k&#363;lele &middot; Green Origin</div>
+    <h1>Flight computers &amp; ground station</h1>
+    <p class="lede">Team H&#333;k&#363;lele builds and flies a two-stage high-power rocket. My part is making sure we know exactly where it is and how it's doing the entire time it's in the air: testing the onboard flight computers, and running the Yagi-antenna ground station that tracks them.</p>
+
+    <dl class="meta">
+      <div><dt>Team</dt><dd>Team H&#333;k&#363;lele</dd></div>
+      <div><dt>Project</dt><dd>Green Origin &middot; 2-stage rocket</dd></div>
+      <div><dt>Focus</dt><dd>Flight computers &amp; ground station</dd></div>
+      <div><dt>Next up</dt><dd>FAR-Unlimited, May 22&ndash;24, 2026</dd></div>
+    </dl>
+
+    <img class="hero-img" src="Team Hokulele final presentation.webp" alt="Team Hokulele presenting their 2025-2026 season conclusion, including shipping their two-stage rocket to California and their plan to compete at FAR-Unlimited">
+  </div>
+
+  <section>
+    <h2>Why flight computers and ground stations matter</h2>
+    <p>A high-power rocket goes places you can't watch it go. Past a few hundred feet, the only way to know altitude, velocity, and where it's going to land is telemetry — a flight computer on board doing the sensing, and a ground station on the ground doing the listening. If either half fails, you don't get a second flight; you get a rocket you have to walk out into the desert to search for.</p>
+    <p>That's the part of the project I own: making sure the onboard computer is recording and transmitting correctly before we ever light the motor, and making sure the ground station can actually hear it once it's a mile downrange and climbing.</p>
+  </section>
+
+  <section>
+    <h2>Testing the flight computers</h2>
+    <p class="sec-note">Our onboard electronics are AltusMetrum TeleBT units — dual-deploy altimeters with a Bluetooth telemetry link.</p>
+    <div class="grid two">
+      <div class="card">
+        <span class="mono">Onboard</span>
+        <h3>TeleBT flight computer</h3>
+        <p>Each stage carries a TeleBT board: it senses altitude and acceleration, fires the deployment charges at apogee and at a set altitude on the way down, and streams that data out over its radio link the whole flight.</p>
+      </div>
+      <div class="card">
+        <span class="mono">Bench work</span>
+        <h3>Pre-flight checkout</h3>
+        <p>Before a flight, I bench-test each unit — confirming the sensors read cleanly, the deployment logic fires at the right points, and the telemetry link is solid, so a bad board gets caught in the shop, not on the pad.</p>
+      </div>
+    </div>
+    <figure class="figblock">
+      <img src="Flight computer TeleBT.webp" alt="An AltusMetrum TeleBT flight computer, the Bluetooth telemetry unit carried on each rocket stage">
+      <figcaption>One of our TeleBT flight computers. It handles altitude sensing, deployment timing, and the telemetry downlink for its stage.</figcaption>
+    </figure>
+  </section>
+
+  <section>
+    <h2>The ground station</h2>
+    <p class="sec-note">Yagi antennas, aimed and tuned so we don't lose the link the moment the rocket leaves the pad.</p>
+    <p>On the ground, we track the rocket with a receiver on a directional <strong>Yagi antenna</strong> — a design that trades a wide field of view for a lot of gain in the direction it's pointed, which is exactly the tradeoff you want when you know roughly where the rocket is going and need range more than coverage. Getting that link right means testing it well before launch day: walking the receiver hardware around, checking reception at range, and making sure the tracking app is reporting altitude, GPS lock, and battery state the way it should before we ever trust it with a live flight.</p>
+    <div class="grid two">
+      <div class="card">
+        <span class="mono">Field checkout</span>
+        <h3>Range and reception testing</h3>
+        <p>Testing the ground receiver away from the bench — different distances, different orientations — to know its real range before it has to work at the field.</p>
+      </div>
+      <div class="card">
+        <span class="mono">Live tracking</span>
+        <h3>Reading the downlink</h3>
+        <p>The ground app decodes GPS, altitude, velocity, and link health in real time, which is how we know the rocket is still transmitting and where to point the recovery team.</p>
+      </div>
+    </div>
+    <div class="gallery">
+      <figure>
+        <img src="Flight computer ground testing.webp" alt="Carrying the Featherweight altimeter ground station receiver down a stairwell during a reception test">
+        <figcaption>Range-testing the ground station receiver ahead of a launch.</figcaption>
+      </figure>
+      <figure>
+        <img src="Flight computer tracker app.webp" alt="The ground station tracking app showing live altitude, distance, GPS lock, and telemetry battery levels for the rocket">
+        <figcaption>Live telemetry: altitude, GPS lock, and link battery health during a test.</figcaption>
+      </figure>
+      <figure>
+        <img src="Oscilloscope and VNA bench.webp" alt="A test bench with an oscilloscope and vector network analyzer used to check the RF link and signal integrity for the telemetry hardware">
+        <figcaption>Bench-checking the RF link with an oscilloscope and VNA before it has to work in the field.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section>
+    <h2>The rocket, and where it's headed</h2>
+    <p>Green Origin is a two-stage rocket, built and refined against last year's design using a more deliberate systems-engineering process the second time around. We shipped it to California on May&nbsp;1st, and the team is headed to the <strong>FAR-Unlimited</strong> competition on <strong>May&nbsp;22&ndash;24, 2026</strong> to fly it.</p>
+    <ul class="bullets">
+      <li><strong>Telemetry is a chain, not a component.</strong> The flight computer, the antenna, the receiver, and the software all have to work together — testing them one at a time isn't the same as testing the link.</li>
+      <li><strong>Field conditions beat bench conditions, every time.</strong> A link that looks perfect on a desk still needs to be walked out and proven at range.</li>
+      <li><strong>Recovery depends on data you never see used.</strong> The whole point of the ground station is telemetry you hope you don't desperately need — until the one flight where you do.</li>
+    </ul>
+    <div class="facts">
+      <span class="fact">AltusMetrum TeleBT</span>
+      <span class="fact">Dual-deploy altimetry</span>
+      <span class="fact">Yagi ground station</span>
+      <span class="fact">FAR-Unlimited 2026</span>
+    </div>
+  </section>
+
+  <div class="p-foot">
+    <a class="btn primary" href="index.html#projects">&larr; All projects</a>
+    <span class="mono">Team H&#333;k&#363;lele &middot; University of Hawai&#699;i at M&#257;noa</span>
+  </div>
+</main>
+
+</body>
+</html>

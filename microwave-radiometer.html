@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ground-based Microwave Radiometer | Alexis Chong</title>
+<meta name="description" content="Building and calibrating a 1.2 m ground-based microwave radiometer from an LNB, SDR, and Raspberry Pi — and measuring the Sun at roughly 10,000 K.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="project.css">
+</head>
+<body>
+
+<nav>
+  <div class="nav-in">
+    <a class="nav-name" href="index.html">Alexis Chong</a>
+    <a class="nav-back" href="index.html#work">&larr; Back to portfolio</a>
+  </div>
+</nav>
+
+<main class="wrap">
+  <div class="p-hero">
+    <div class="eyebrow">HIGP &middot; Student observatory</div>
+    <h1>Ground-based microwave radiometer</h1>
+    <p class="lede">A 1.2&nbsp;m dish, a satellite TV LNB, a software-defined radio, and a Raspberry Pi — turned into an instrument that can actually measure the temperature of the Sun.</p>
+
+    <dl class="meta">
+      <div><dt>Instrument</dt><dd>1.2&nbsp;m offset dish</dd></div>
+      <div><dt>Band</dt><dd>Ku-band, via satellite LNB</dd></div>
+      <div><dt>Result</dt><dd>Sun measured at ~10,000&nbsp;K</dd></div>
+      <div><dt>Status</dt><dd>Tracking mount in progress</dd></div>
+    </dl>
+
+    <img class="hero-img" src="Ground Microwave Radiometer.webp" alt="The ground-based microwave radiometer: a 1.2 metre dish with the LNB front end mounted at the feed">
+  </div>
+
+  <section>
+    <h2>Why build one</h2>
+    <p>A radiometer doesn't take pictures — it measures power, and converts that power into a temperature. That makes it a genuinely useful teaching instrument, because there's nowhere to hide: if the calibration is wrong, the number is wrong, and the sky will tell you.</p>
+    <p>I wanted to build one from commodity parts to prove the whole chain could be done on a student budget, and to leave behind something the department could keep using. Consumer satellite TV hardware is remarkably good radio hardware that happens to be cheap, which is what makes the whole project possible.</p>
+  </section>
+
+  <section>
+    <h2>The signal chain</h2>
+    <p class="sec-note">Every stage adds noise. The job is knowing exactly how much.</p>
+    <div class="grid">
+      <div class="card">
+        <span class="mono">Front end</span>
+        <h3>Dish + LNB</h3>
+        <p>A 1.2&nbsp;m offset dish collects the power; a satellite low-noise block downconverter amplifies it and shifts it down to an IF the radio can digitise.</p>
+      </div>
+      <div class="card">
+        <span class="mono">Digitiser</span>
+        <h3>Software-defined radio</h3>
+        <p>The SDR samples the IF and hands raw complex samples to the Pi, which puts the whole back end of the instrument in software.</p>
+      </div>
+      <div class="card">
+        <span class="mono">Back end</span>
+        <h3>Raspberry Pi + Python</h3>
+        <p>Capture, integration, calibration, and logging all run on the Pi, so the instrument records continuously without a laptop attached.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Calibration — the part that makes it an instrument</h2>
+    <p>Raw SDR counts are meaningless on their own. To turn them into a temperature you need two known points, so I calibrated against a <strong>hot load</strong> and the <strong>cold sky</strong>: an ambient-temperature absorber at a known physical temperature at one end, and a patch of empty sky at the other. Those two points give you the gain and offset of the whole chain, and everything measured afterwards is referenced to them.</p>
+    <p>With that calibration in place, pointing the dish at the Sun returned a brightness temperature of roughly <strong>10,000&nbsp;K</strong> — in the right regime for the quiet Sun at these frequencies through a beam of this size. Seeing a number come out of a pile of consumer parts that agrees with physics is the single most satisfying moment I've had in a lab.</p>
+    <ul class="bullets">
+      <li><strong>Two-point calibration</strong> against a hot absorber and cold sky, repeated across sessions to watch for drift.</li>
+      <li><strong>Integration time</strong> traded against how quickly the gain wanders — longer averaging lowers noise right up until drift dominates.</li>
+      <li><strong>Beam and pointing</strong> matter as much as the electronics: the measured temperature depends on how much of the beam the Sun actually fills.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>The Python pipeline</h2>
+    <p>The software side handles capture from the SDR, integration, the two-point calibration solve, and analysis and plotting of the results. Writing it myself meant I had to understand every step between a raw sample and a temperature — which turned out to be the real education in the project. It also means the pipeline is reproducible: the same recorded data run again gives the same answer.</p>
+  </section>
+
+  <section>
+    <h2>Where it's going</h2>
+    <p>The instrument currently has to be pointed by hand, which caps how long a measurement can run and makes the Sun a moving target. The next step is a <strong>motorized tracking mount</strong> so it can follow a source across the sky unattended, and from there a permanent station — a student observatory that runs continuously instead of only when someone is standing next to it.</p>
+  </section>
+
+  <section>
+    <h2>Gallery</h2>
+    <div class="gallery">
+      <figure>
+        <img src="Radiometer dish setup.webp" alt="The radiometer dish and feed horn mounted on a tripod indoors during setup">
+        <figcaption>The dish and feed setup, indoors during assembly and testing.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section>
+    <h2>Write-up</h2>
+    <p class="sec-note">I documented the build and results as a full technical report in IEEE format.</p>
+    <div class="dl">
+      <a class="btn primary" href="Microwave Radiometer IEEE Report.pdf" target="_blank" rel="noopener noreferrer">Read the technical report (PDF)</a>
+    </div>
+  </section>
+
+  <div class="p-foot">
+    <a class="btn primary" href="index.html#work">&larr; All work</a>
+    <span class="mono">Hawai&#699;i Institute of Geophysics and Planetology</span>
+  </div>
+</main>
+
+</body>
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AEFLES Strain Sensing | Alexis Chong</title>
+<meta name="description" content="A grant-funded, real-time structural strain sensing system — embedded sensors, avionics integration, and simulation work in Python and Julia.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="project.css">
+</head>
+<body>
+
+<nav>
+  <div class="nav-in">
+    <a class="nav-name" href="index.html">Alexis Chong</a>
+    <a class="nav-back" href="index.html#projects">&larr; Back to portfolio</a>
+  </div>
+</nav>
+
+<main class="wrap">
+  <div class="p-hero">
+    <div class="eyebrow">Grant-funded &middot; Project lead</div>
+    <h1>AEFLES strain sensing</h1>
+    <p class="lede">A real-time structural strain sensing system: embedded sensors on the structure, avionics reading them as it flexes, and simulation work to check that what we measured is what we should have measured.</p>
+
+    <dl class="meta">
+      <div><dt>Role</dt><dd>Project lead</dd></div>
+      <div><dt>Funding</dt><dd>Grant-funded</dd></div>
+      <div><dt>Sensing</dt><dd>5+ embedded sensors</dd></div>
+      <div><dt>Simulation</dt><dd>Python &amp; Julia</dd></div>
+    </dl>
+
+    <img class="hero-img" src="AEFLES.png" alt="Receiving the grant award that funded the AEFLES project">
+  </div>
+
+  <section>
+    <h2>The idea</h2>
+    <p>Structures deform under load in ways that are hard to predict from the outside, and by the time damage is visible you've usually missed the interesting part. AEFLES instruments the structure directly: embedded strain sensors report how it's actually flexing, in real time, while it's loaded.</p>
+    <p>The value is in the word <em>real-time</em>. A post-test inspection tells you where a structure ended up. A live strain readout tells you how it got there — which load path carried the force, which region responded first, and whether the structure is behaving the way the model said it would.</p>
+  </section>
+
+  <section>
+    <h2>What I built and led</h2>
+    <div class="grid">
+      <div class="card">
+        <span class="mono">Hardware</span>
+        <h3>Embedded sensing</h3>
+        <p>Integrating 5+ strain sensors into the structure and wiring them into embedded avionics that read and log them continuously.</p>
+      </div>
+      <div class="card">
+        <span class="mono">Software</span>
+        <h3>Simulation &amp; analysis</h3>
+        <p>Python and Julia models of the structural response, used to predict what the sensors should see and to interpret what they did see.</p>
+      </div>
+      <div class="card">
+        <span class="mono">Project</span>
+        <h3>Leading the build</h3>
+        <p>Writing the funded proposal into a real schedule, dividing the work, and keeping hardware and modeling moving in step.</p>
+      </div>
+    </div>
+    <p style="margin-top:28px">The interesting engineering problem sat between those first two boxes. Strain signals are small, and the difference between a real structural response and an artifact of how a sensor was mounted is not obvious from the data alone. Having a simulation to compare against is what makes the measurement trustworthy — and having real measurements is what keeps the simulation honest. Neither half is worth much without the other.</p>
+  </section>
+
+  <section>
+    <h2>What I took from it</h2>
+    <ul class="bullets">
+      <li><strong>Sensor placement is a design decision, not an installation detail.</strong> Where a sensor goes determines what you're capable of learning.</li>
+      <li><strong>Validate the instrument before you trust the data.</strong> The first surprising result is far more likely to be a mounting problem than a discovery.</li>
+      <li><strong>Leading a funded project is scoping.</strong> The proposal promises something; the schedule is where you find out what that actually costs in hours.</li>
+      <li><strong>Model and measurement are a loop.</strong> They correct each other, and the disagreements between them are where the learning is.</li>
+    </ul>
+    <div class="facts">
+      <span class="fact">Strain sensing</span>
+      <span class="fact">Embedded avionics</span>
+      <span class="fact">Python</span>
+      <span class="fact">Julia</span>
+      <span class="fact">Grant-funded</span>
+    </div>
+  </section>
+
+  <section>
+    <h2>Write-up</h2>
+    <div class="dl">
+      <a class="btn primary" href="AEFLES report.pdf" target="_blank" rel="noopener noreferrer">Read the project report (PDF)</a>
+    </div>
+  </section>
+
+  <div class="p-foot">
+    <a class="btn primary" href="index.html#projects">&larr; All projects</a>
+    <span class="mono">University of Hawai&#699;i at M&#257;noa</span>
+  </div>
+</main>
+
+</body>
+</html>

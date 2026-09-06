@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Project PETAL | Alexis Chong</title>
+<meta name="description" content="A NASA RASC-AL top-14 finalist lunar habitat concept — power architecture and thermal modeling for a crewed surface mission.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="project.css">
+</head>
+<body>
+
+<nav>
+  <div class="nav-in">
+    <a class="nav-name" href="index.html">Alexis Chong</a>
+    <a class="nav-back" href="index.html#projects">&larr; Back to portfolio</a>
+  </div>
+</nav>
+
+<main class="wrap">
+  <div class="p-hero">
+    <div class="eyebrow">NASA RASC-AL &middot; National finalist</div>
+    <h1>Project PETAL</h1>
+    <p class="lede">A lunar habitat concept built around one uncomfortable question: where does the power come from, and where does the waste heat go?</p>
+
+    <dl class="meta">
+      <div><dt>Competition</dt><dd>NASA RASC-AL</dd></div>
+      <div><dt>Result</dt><dd>Top-14 finalist, nationally</dd></div>
+      <div><dt>My focus</dt><dd>Power &amp; thermal</dd></div>
+      <div><dt>Scope</dt><dd>Crewed lunar surface mission</dd></div>
+    </dl>
+
+    <img class="hero-img" src="Team Petal.webp" alt="The Project PETAL team">
+  </div>
+
+  <section>
+    <h2>The problem</h2>
+    <p>RASC-AL asks student teams to develop a full mission concept to the standard NASA would actually review — architecture, analysis, and a technical paper defended in front of judges. Ours was a crewed lunar surface habitat, and my part of it was the power architecture and the thermal modeling that goes with it.</p>
+    <p>Those two are the same problem wearing different hats. On the Moon there's no atmosphere to convect heat into, so <strong>every watt you generate you eventually have to radiate away</strong>. A power system sized for the habitat's peak load is also a heat source the thermal system has to be built around, and the lunar day/night cycle swings the environment at both ends. Sizing one without the other gets you a design that doesn't close.</p>
+  </section>
+
+  <section>
+    <h2>What we modeled</h2>
+    <div class="grid">
+      <div class="card">
+        <span class="mono">Power</span>
+        <h3>Generation architecture</h3>
+        <p>How a fission-based power system could carry the habitat's load through the lunar night, when solar generation isn't an option for two weeks at a time.</p>
+      </div>
+      <div class="card">
+        <span class="mono">Thermal</span>
+        <h3>Heat rejection</h3>
+        <p>Radiator sizing and thermal limits — the constraint that quietly sets the upper bound on how much power the habitat can actually use.</p>
+      </div>
+      <div class="card">
+        <span class="mono">Systems</span>
+        <h3>Requirements &amp; tradeoffs</h3>
+        <p>Balancing mission requirements against mass, complexity, and the engineering realities of building something that has to work far from help.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>How it went</h2>
+    <p>The concept finished as a <strong>top-14 finalist nationally</strong>, which meant defending the work in front of a panel that knew considerably more about it than we did. That review is the part I'd keep: having to justify a modeling assumption out loud to someone who has actually flown hardware is a very fast way to find out which of your numbers you truly believe.</p>
+    <ul class="bullets">
+      <li><strong>Subsystems don't have separate answers.</strong> Power and thermal had to be sized together or neither number meant anything.</li>
+      <li><strong>Assumptions are the real deliverable.</strong> Reviewers spent far more time on why we assumed something than on the arithmetic that followed.</li>
+      <li><strong>A concept has to be legible.</strong> Work that can't be explained clearly to a room doesn't get evaluated on its merits.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>The submission</h2>
+    <p class="sec-note">Our full technical paper and the poster we presented at the forum.</p>
+    <div class="dl">
+      <a class="btn primary" href="Team PETAL technical paper.pdf" target="_blank" rel="noopener noreferrer">Read the technical paper (PDF)</a>
+      <a class="btn" href="Team PETAL poster.png" target="_blank" rel="noopener noreferrer">View the poster</a>
+    </div>
+    <figure class="figblock">
+      <img src="Team PETAL poster.png" alt="The Project PETAL conference poster presenting the lunar habitat concept, power architecture, and thermal analysis" loading="lazy">
+      <figcaption>The poster we presented at the RASC-AL forum.</figcaption>
+    </figure>
+  </section>
+
+  <section>
+    <h2>Gallery</h2>
+    <div class="gallery">
+      <figure>
+        <img src="Team Petal.webp" alt="The Project PETAL team" loading="lazy">
+        <figcaption>The team.</figcaption>
+      </figure>
+      <figure>
+        <img src="Random Images Team Petal.webp" alt="Project PETAL team at the forum" loading="lazy">
+        <figcaption>At the forum.</figcaption>
+      </figure>
+      <figure>
+        <img src="RASC-AL forum.webp" alt="Standing beside the RASC-AL forum banner at the National Institute of Aerospace" loading="lazy">
+        <figcaption>At the RASC-AL forum, presented by the National Institute of Aerospace and NASA.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <div class="p-foot">
+    <a class="btn primary" href="index.html#projects">&larr; All projects</a>
+    <span class="mono">NASA RASC-AL &middot; UH M&#257;noa</span>
+  </div>
+</main>
+
+</body>
+</html>
