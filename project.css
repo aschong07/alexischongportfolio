@@ -60,9 +60,11 @@ h3{font-size:1.06rem;font-weight:700;margin-bottom:6px}
 p{color:var(--dust);max-width:70ch;margin-bottom:16px}
 p strong,li strong{color:var(--moonlight);font-weight:600}
 
-.bullets{list-style:none;max-width:70ch}
-.bullets li{display:flex;gap:12px;padding:8px 0;color:var(--dust)}
-.bullets li::before{content:"◆";color:var(--cold);font-size:.68rem;line-height:2.2;flex:none}
+.bullets{list-style:none;max-width:70ch;border-top:1px solid var(--line)}
+.bullets li{position:relative;padding:14px 0 14px 24px;border-bottom:1px solid var(--line)}
+.bullets li::before{content:"◆";position:absolute;left:2px;top:17px;color:var(--cold);font-size:.62rem}
+.bullets li strong{display:block;color:var(--moonlight);font-size:.98rem}
+.bullets li span{display:block;color:var(--dust);font-size:.92rem;margin-top:5px;padding-left:2px}
 
 /* card grids */
 .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:8px}

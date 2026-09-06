@@ -9,7 +9,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root{
-    --space:#020917;        /* deep space background */
+    --space:#000000;        /* deep space background */
     --space-2:#000000;      /* darker section surfaces */
     --card:rgba(10,18,35,0.92); /* translucent card surface */
     --line:rgba(141,164,190,0.16); /* soft divider lines */
@@ -28,7 +28,7 @@
   }
   body{
     font-family:'Montserrat',system-ui,sans-serif;font-weight:300;
-    background:radial-gradient(circle at top, #0b1c38 0%, #020917 35%, #02050f 100%);
+    background:#000000;
     color:var(--moonlight);line-height:1.6;
     overflow-x:hidden;
   }
@@ -275,7 +275,9 @@
 
   /* ---------- gallery ---------- */
   .gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-  .gallery .shot{min-height:220px;border-radius:12px;overflow:hidden;border:1px solid var(--line);box-shadow: 0 4px 15px rgba(33, 37, 41, 0.03)}
+  .gallery figure{background:rgba(6,12,24,0.75);border:1px solid var(--line);border-radius:12px;overflow:hidden;box-shadow: 0 4px 15px rgba(33, 37, 41, 0.03)}
+  .gallery figure img{display:block;width:100%;height:220px;object-fit:cover}
+  .gallery figcaption{padding:12px 14px;font-family:'IBM Plex Mono',monospace;font-size:.76rem;color:var(--dust);line-height:1.5}
 
   /* ---------- off duty ---------- */
   .offduty-container{position:relative}
@@ -522,7 +524,7 @@
         <div class="feat-body">
           <div class="tag">Team H&#333;k&#363;lele &middot; Rocketry</div>
           <h3>Flight computers &amp; ground station</h3>
-          <p>Testing onboard flight computers and running a Yagi-antenna ground station for a two-stage high-power rocket headed to the FAR-Unlimited competition.</p>
+          <p>Testing onboard flight computers and running a Yagi-antenna ground station for a two-stage high-power rocket flown at the FAR-Unlimited competition.</p>
           <a class="detail-link" href="team-hokulele.html">Explore Team H&#333;k&#363;lele &rarr;</a>
         </div>
       </article>
@@ -555,24 +557,18 @@
     <h2>Photos</h2>
     <p class="sec-note">Some of the moments that aren’t always obvious from the résumé.</p>
     <div class="gallery">
-      <figure class="shot"><img src="Random Images Team Petal.webp" alt="Team Petal" onerror="this.parentElement.classList.add('empty');this.remove()"></figure>
-      <figure class="shot"><img src="Random Images Hawaii Annual Code Challenge.png" alt="Hawaii Annual Code Challenge" onerror="this.parentElement.classList.add('empty');this.remove()"></figure>
-      <figure class="shot"><img src="Random Images Up on Lanikai.webp" alt="Lanikai" onerror="this.parentElement.classList.add('empty');this.remove()"></figure>
-      <figure class="shot"><img src="Random Images Teaching a Class.webp" alt="Teaching a class" onerror="this.parentElement.classList.add('empty');this.remove()"></figure>
-      <figure class="shot"><img src="Random Images Transporting the Rover.webp" alt="Packing and transporting the rover" onerror="this.parentElement.classList.add('empty');this.remove()"></figure>
-      <figure class="shot"><img src="FabLab Monitoring.webp" alt="Monitoring a shift in the UH M&#257;noa FabLab" onerror="this.parentElement.classList.add('empty');this.remove()"></figure>
-      <figure class="shot"><img src="Rover packing.webp" alt="Packing the rover for competition" onerror="this.parentElement.classList.add('empty');this.remove()"></figure>
-      <figure class="shot"><img src="Team RoSE recruitment meeting.jpg" alt="Team RoSE recruitment meeting" onerror="this.parentElement.classList.add('empty');this.remove()"></figure>
-      <figure class="shot">
-        <video controls preload="metadata" style="width:100%;height:100%;object-fit:cover">
-          <source src="Random Images Launching a ROCKET!.mp4" type="video/mp4">
-          Your browser does not support the video tag.
-        </video>
-      </figure>
-      <figure class="shot"><img src="Team at Hawaii Annual Code Challenge.webp" alt="The team at the Hawaii Annual Code Challenge" onerror="this.parentElement.classList.add('empty');this.remove()"></figure>
-      <figure class="shot"><img src="Working on Hawaii Annual Code Challenge.webp" alt="Working through a problem at the Hawaii Annual Code Challenge" onerror="this.parentElement.classList.add('empty');this.remove()"></figure>
-      <figure class="shot"><img src="FPGA Verilog board coding.webp" alt="Coding an FPGA dev board in Verilog" onerror="this.parentElement.classList.add('empty');this.remove()"></figure>
-      <figure class="shot"><img src="RC car electronics help.webp" alt="Wiring up a small RC car's electronics as a favor for a friend" onerror="this.parentElement.classList.add('empty');this.remove()"></figure>
+      <figure><img src="Random Images Team Petal.webp" alt="Team Petal" onerror="this.closest('figure').remove()"><figcaption>Team PETAL</figcaption></figure>
+      <figure><img src="Random Images Hawaii Annual Code Challenge.png" alt="Hawaii Annual Code Challenge" onerror="this.closest('figure').remove()"><figcaption>At the Hawai&#699;i Annual Code Challenge</figcaption></figure>
+      <figure><img src="Random Images Up on Lanikai.webp" alt="Up on Lanikai" onerror="this.closest('figure').remove()"><figcaption>Up on Lanikai</figcaption></figure>
+      <figure><img src="Random Images Teaching a Class.webp" alt="Teaching a class" onerror="this.closest('figure').remove()"><figcaption>Teaching a class</figcaption></figure>
+      <figure><img src="Random Images Transporting the Rover.webp" alt="Packing and transporting the rover" onerror="this.closest('figure').remove()"><figcaption>Packing and transporting the rover</figcaption></figure>
+      <figure><img src="FabLab Monitoring.webp" alt="Monitoring a shift in the UH M&#257;noa FabLab" onerror="this.closest('figure').remove()"><figcaption>Monitoring a shift in the FabLab</figcaption></figure>
+      <figure><img src="Rover packing.webp" alt="Packing the rover for competition" onerror="this.closest('figure').remove()"><figcaption>Packing the rover for competition</figcaption></figure>
+      <figure><img src="Team RoSE recruitment meeting.jpg" alt="Team RoSE recruitment meeting" onerror="this.closest('figure').remove()"><figcaption>Team RoSE recruitment night</figcaption></figure>
+      <figure><img src="Team at Hawaii Annual Code Challenge.webp" alt="The team at the Hawaii Annual Code Challenge" onerror="this.closest('figure').remove()"><figcaption>The team at HACC</figcaption></figure>
+      <figure><img src="Working on Hawaii Annual Code Challenge.webp" alt="Working through a problem at the Hawaii Annual Code Challenge" onerror="this.closest('figure').remove()"><figcaption>Working through a problem at HACC</figcaption></figure>
+      <figure><img src="FPGA Verilog board coding.webp" alt="Coding an FPGA dev board in Verilog" onerror="this.closest('figure').remove()"><figcaption>Coding an FPGA board in Verilog</figcaption></figure>
+      <figure><img src="RC car electronics help.webp" alt="Wiring up a small RC car's electronics as a favor for a friend" onerror="this.closest('figure').remove()"><figcaption>Helping a friend wire up an RC car</figcaption></figure>
     </div>
   </section>
 
@@ -627,10 +623,8 @@
     var moon = document.getElementById('moon');
     function onScroll(){
       var s = Math.min(window.scrollY / (window.innerHeight * 0.8), 1);
-      var translateX = -50 + (s * 65);
       var translateY = s * 80;
-      var scale = 1 + (s * 0.35);
-      moon.style.setProperty('--moontx', translateX.toFixed(2) + '%');
+      var scale = 1 + (s * 0.7);
       moon.style.setProperty('--moonty', translateY.toFixed(2) + 'px');
       moon.style.setProperty('--moonscale', scale.toFixed(3));
     }
