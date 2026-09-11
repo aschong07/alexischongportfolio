@@ -75,6 +75,34 @@
   </section>
 
   <section>
+    <h2>Why beam shape matters</h2>
+    <p class="sec-note">A representative antenna radiation pattern — the kind of plot that describes how a dish like this actually "sees" the sky.</p>
+    <div class="rf-figure">
+      <svg viewBox="0 0 320 320" role="img" aria-label="Polar radiation pattern showing a narrow main lobe, two small side lobes, and a small back lobe">
+        <circle cx="160" cy="160" r="150" fill="none" stroke="var(--line)" stroke-width="1"/>
+        <circle cx="160" cy="160" r="112" fill="none" stroke="var(--line)" stroke-width="1"/>
+        <circle cx="160" cy="160" r="75" fill="none" stroke="var(--line)" stroke-width="1"/>
+        <circle cx="160" cy="160" r="37" fill="none" stroke="var(--line)" stroke-width="1"/>
+        <g stroke="var(--line)" stroke-width="1">
+          <line x1="160" y1="10" x2="160" y2="310"/>
+          <line x1="10" y1="160" x2="310" y2="160"/>
+          <line x1="54" y1="54" x2="266" y2="266"/>
+          <line x1="266" y1="54" x2="54" y2="266"/>
+        </g>
+        <g fill="rgba(219,39,119,0.18)" stroke="#db2777" stroke-width="1.75" stroke-linejoin="round">
+          <path d="M 160,160 Q 175.0,78.6 160.0,12.0 Q 145.0,78.6 160,160 Z"/>
+          <path d="M 160,160 Q 186.5,152.2 195.2,130.4 Q 172.3,135.3 160,160 Z"/>
+          <path d="M 160,160 Q 147.7,135.3 124.8,130.4 Q 133.5,152.2 160,160 Z"/>
+          <path d="M 160,160 Q 151.0,174.3 160.0,186.0 Q 169.0,174.3 160,160 Z"/>
+        </g>
+        <text x="160" y="26" text-anchor="middle" class="rf-label">0&deg; (boresight)</text>
+        <text x="160" y="300" text-anchor="middle" class="rf-label">180&deg;</text>
+      </svg>
+      <p class="rf-caption">The tall petal is the main lobe — where nearly all the gain is concentrated — pointed straight at the source. The small petals are side lobes and a back lobe: energy the dish still picks up off-axis, which is exactly what calibration and careful pointing have to account for.</p>
+    </div>
+  </section>
+
+  <section>
     <h2>The Python pipeline</h2>
     <p>The software side handles capture from the SDR, integration, the two-point calibration solve, and analysis and plotting of the results. Writing it myself meant I had to understand every step between a raw sample and a temperature — which turned out to be the real education in the project. It also means the pipeline is reproducible: the same recorded data run again gives the same answer.</p>
   </section>
