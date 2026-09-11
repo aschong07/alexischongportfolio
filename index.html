@@ -220,6 +220,75 @@
   .facts{margin-top:auto;padding-top:18px;display:flex;gap:9px;flex-wrap:wrap}
   .fact{font-family:'IBM Plex Mono',monospace;font-size:.73rem;padding:5px 11px;border:1px solid var(--line);border-radius:999px;color:var(--moonlight);background:var(--space)}
 
+  /* ---------- mission map ---------- */
+  .mission-map{
+    position:relative;overflow:visible;
+    aspect-ratio:900/400;width:100%;
+    background:#0a0510;border-radius:var(--radius);
+    margin-bottom:32px;
+    box-shadow:0 18px 40px rgba(0,0,0,0.22);
+  }
+  .map-stars{
+    position:absolute;inset:0;border-radius:var(--radius);overflow:hidden;pointer-events:none;
+    background-image:
+      radial-gradient(1px 1px at 8% 20%, rgba(255,255,255,0.9) 50%, transparent 51%),
+      radial-gradient(1px 1px at 18% 65%, rgba(255,200,230,0.7) 50%, transparent 51%),
+      radial-gradient(1px 1px at 30% 30%, rgba(255,255,255,0.85) 50%, transparent 51%),
+      radial-gradient(1px 1px at 45% 80%, rgba(255,255,255,0.7) 50%, transparent 51%),
+      radial-gradient(1px 1px at 58% 15%, rgba(255,200,230,0.75) 50%, transparent 51%),
+      radial-gradient(1px 1px at 68% 55%, rgba(255,255,255,0.8) 50%, transparent 51%),
+      radial-gradient(1px 1px at 80% 25%, rgba(255,255,255,0.85) 50%, transparent 51%),
+      radial-gradient(1px 1px at 90% 70%, rgba(255,200,230,0.6) 50%, transparent 51%),
+      radial-gradient(1px 1px at 96% 40%, rgba(255,255,255,0.75) 50%, transparent 51%);
+  }
+  .map-trail{position:absolute;inset:0;width:100%;height:100%}
+  .map-trail path{fill:none;stroke:#ff3fb0;stroke-width:2.5;stroke-dasharray:2 10;stroke-linecap:round;opacity:.6}
+  .map-node{
+    position:absolute;transform:translate(-50%,-50%);
+    display:flex;flex-direction:column;align-items:center;gap:8px;
+    background:none;border:none;padding:6px;cursor:pointer;
+    font-family:'IBM Plex Mono',monospace;
+  }
+  .map-node .dot{
+    width:16px;height:16px;border-radius:50%;
+    background:#ff3fb0;
+    box-shadow:0 0 6px rgba(255,63,176,0.95),0 0 16px rgba(255,63,176,0.75),0 0 32px rgba(255,63,176,0.5);
+    transition:transform .2s ease;
+  }
+  .map-node .label{
+    font-size:.7rem;letter-spacing:.04em;color:#fdeaf3;white-space:nowrap;
+    text-shadow:0 1px 4px rgba(0,0,0,0.6);
+  }
+  .map-node:hover .dot,.map-node:focus-visible .dot{transform:scale(1.35)}
+  .map-node[aria-expanded="true"] .dot{transform:scale(1.35);background:#ffffff;box-shadow:0 0 8px rgba(255,255,255,1),0 0 22px rgba(255,63,176,0.9)}
+  .map-popup{
+    position:absolute;left:50%;transform:translate(-50%,-100%);margin-top:-24px;
+    width:230px;max-width:60vw;
+    background:#ffffff;border-radius:14px;padding:18px 18px 16px;
+    box-shadow:0 20px 40px rgba(0,0,0,0.35);
+    opacity:0;pointer-events:none;transition:opacity .15s ease,transform .15s ease;
+    z-index:5;
+  }
+  .map-popup.below{transform:translate(-50%,0);margin-top:24px;margin-bottom:0}
+  .map-popup.open{opacity:1;pointer-events:auto}
+  .map-popup .tag{font-family:'IBM Plex Mono',monospace;font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;color:var(--cold);margin-bottom:6px}
+  .map-popup h3{font-size:1rem;margin-bottom:6px;color:var(--moonlight)}
+  .map-popup p{font-size:.83rem;color:var(--dust);margin-bottom:10px;line-height:1.5}
+  .map-popup .detail-link{font-size:.74rem}
+  .map-popup-close{
+    position:absolute;top:8px;right:10px;background:none;border:none;
+    font-size:1.1rem;line-height:1;color:var(--dust);cursor:pointer;padding:4px;
+  }
+  .map-popup-close:hover{color:var(--moonlight)}
+  #node-lmaps{left:calc(7.78% + 40px);transform:translate(0,-100%)}
+  #node-lmaps.below{transform:translate(0,0)}
+  #node-pathfinder{left:auto;right:2%;transform:translate(0,-100%)}
+  #node-pathfinder.below{transform:translate(0,0)}
+  @media (max-width:700px){
+    .map-node .label{display:none}
+    .map-popup{width:190px;max-width:70vw}
+  }
+
   .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:22px}
   .cardp{background:#ffffff;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;display:flex;flex-direction:column;box-shadow: 0 10px 30px rgba(0,0,0,0.08)}
   .cardp .shot{min-height:190px}
@@ -442,7 +511,104 @@
   <section id="projects">
     <div class="sec-eyebrow">03 &middot; Sky survey</div>
     <h2>Projects</h2>
-    <p class="sec-note">A few bigger pushes that shaped how I work across interdisciplinary engineering.</p>
+    <p class="sec-note">A few bigger pushes that shaped how I work across interdisciplinary engineering. Click a station on the map to explore one, or scroll past for the full list.</p>
+
+    <div class="mission-map" id="missionMap">
+      <div class="map-stars" aria-hidden="true"></div>
+      <svg class="map-trail" viewBox="0 0 900 400" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M70,300 Q130,60 190,110 T310,300 T430,110 T550,300 T670,110 T790,300 T860,130" />
+      </svg>
+
+      <button type="button" class="map-node" style="left:7.78%;top:75%" data-target="node-lmaps" aria-expanded="false">
+        <span class="dot"></span>
+        <span class="label">L-MAPS</span>
+      </button>
+      <button type="button" class="map-node" style="left:21.11%;top:27.5%" data-target="node-radiometer" aria-expanded="false">
+        <span class="dot"></span>
+        <span class="label">Radiometer</span>
+      </button>
+      <button type="button" class="map-node" style="left:34.44%;top:75%" data-target="node-rover" aria-expanded="false">
+        <span class="dot"></span>
+        <span class="label">Rover Comms</span>
+      </button>
+      <button type="button" class="map-node" style="left:47.78%;top:27.5%" data-target="node-hokulele" aria-expanded="false">
+        <span class="dot"></span>
+        <span class="label">H&#333;k&#363;lele</span>
+      </button>
+      <button type="button" class="map-node" style="left:61.11%;top:75%" data-target="node-petal" aria-expanded="false">
+        <span class="dot"></span>
+        <span class="label">PETAL</span>
+      </button>
+      <button type="button" class="map-node" style="left:74.44%;top:27.5%" data-target="node-aefles" aria-expanded="false">
+        <span class="dot"></span>
+        <span class="label">AEFLES</span>
+      </button>
+      <button type="button" class="map-node" style="left:87.78%;top:75%" data-target="node-cleanroom" aria-expanded="false">
+        <span class="dot"></span>
+        <span class="label">Cleanroom</span>
+      </button>
+      <button type="button" class="map-node" style="left:95.56%;top:32.5%" data-target="node-pathfinder" aria-expanded="false">
+        <span class="dot"></span>
+        <span class="label">Pathfinder</span>
+      </button>
+
+      <div class="map-popup" id="node-lmaps" style="left:7.78%;top:75%">
+        <button type="button" class="map-popup-close" aria-label="Close">&times;</button>
+        <div class="tag">NASA Artemis &middot; HSFL</div>
+        <h3>L-MAPS</h3>
+        <p>Supporting a lunar heat-flow radiometer for the Artemis Lunar Terrain Vehicle.</p>
+        <a class="detail-link" href="l-maps.html">View project &rarr;</a>
+      </div>
+      <div class="map-popup" id="node-radiometer" style="left:21.11%;top:27.5%">
+        <button type="button" class="map-popup-close" aria-label="Close">&times;</button>
+        <div class="tag">HIGP &middot; Student observatory</div>
+        <h3>Microwave radiometer</h3>
+        <p>Built and calibrated a 1.2&nbsp;m radiometer, measured the Sun at roughly 10,000&nbsp;K.</p>
+        <a class="detail-link" href="microwave-radiometer.html">View project &rarr;</a>
+      </div>
+      <div class="map-popup" id="node-rover" style="left:34.44%;top:75%">
+        <button type="button" class="map-popup-close" aria-label="Close">&times;</button>
+        <div class="tag">University Rover Challenge</div>
+        <h3>Rover Comms &amp; Avionics</h3>
+        <p>Dual-band telemetry and the power/data architecture for Team RoSE's rover.</p>
+        <a class="detail-link" href="rover-comms-avionics.html">View project &rarr;</a>
+      </div>
+      <div class="map-popup" id="node-hokulele" style="left:47.78%;top:27.5%">
+        <button type="button" class="map-popup-close" aria-label="Close">&times;</button>
+        <div class="tag">Rocketry &middot; Finalist</div>
+        <h3>Team H&#333;k&#363;lele</h3>
+        <p>Flight computer testing and a Yagi-antenna ground station for a 2-stage rocket.</p>
+        <a class="detail-link" href="team-hokulele.html">View project &rarr;</a>
+      </div>
+      <div class="map-popup" id="node-petal" style="left:61.11%;top:75%">
+        <button type="button" class="map-popup-close" aria-label="Close">&times;</button>
+        <div class="tag">NASA RASC-AL &middot; Finalist</div>
+        <h3>Project PETAL</h3>
+        <p>Lunar habitat power architecture and thermal modeling for a crewed surface mission.</p>
+        <a class="detail-link" href="project-petal.html">View project &rarr;</a>
+      </div>
+      <div class="map-popup" id="node-aefles" style="left:74.44%;top:27.5%">
+        <button type="button" class="map-popup-close" aria-label="Close">&times;</button>
+        <div class="tag">Grant-funded &middot; Project lead</div>
+        <h3>AEFLES</h3>
+        <p>A real-time structural strain sensing system with embedded sensors and simulation.</p>
+        <a class="detail-link" href="aefles-strain-sensing.html">View project &rarr;</a>
+      </div>
+      <div class="map-popup" id="node-cleanroom" style="left:87.78%;top:75%">
+        <button type="button" class="map-popup-close" aria-label="Close">&times;</button>
+        <div class="tag">UH M&#257;noa cleanroom</div>
+        <h3>Semiconductor fabrication</h3>
+        <p>Photolithography and thermal evaporation, fabricating sensors and OLED structures.</p>
+        <a class="detail-link" href="semiconductor-fabrication.html">View project &rarr;</a>
+      </div>
+      <div class="map-popup" id="node-pathfinder" style="left:95.56%;top:32.5%">
+        <button type="button" class="map-popup-close" aria-label="Close">&times;</button>
+        <div class="tag">HACC &middot; Finalist</div>
+        <h3>UH Pathfinder</h3>
+        <p>A major/career finder for UH M&#257;noa students with an interactive campus map.</p>
+        <a class="detail-link" href="uh-pathfinder.html">View project &rarr;</a>
+      </div>
+    </div>
 
     <div class="grid">
       <article class="cardp">
@@ -648,6 +814,51 @@
       var dishFeature = document.querySelector('#work .feature');
       if (dishFeature) dishObserver.observe(dishFeature);
     }
+  })();
+
+  (function(){
+    var map = document.getElementById('missionMap');
+    if (!map) return;
+    var nodes = map.querySelectorAll('.map-node');
+    var belowIds = ['node-radiometer','node-hokulele','node-aefles','node-pathfinder'];
+
+    function closeAll(except){
+      nodes.forEach(function(n){
+        if (n === except) return;
+        n.setAttribute('aria-expanded','false');
+        var p = document.getElementById(n.dataset.target);
+        if (p) p.classList.remove('open');
+      });
+    }
+
+    nodes.forEach(function(node){
+      var popup = document.getElementById(node.dataset.target);
+      if (!popup) return;
+      if (belowIds.indexOf(node.dataset.target) !== -1) popup.classList.add('below');
+
+      node.addEventListener('click', function(e){
+        e.stopPropagation();
+        var isOpen = node.getAttribute('aria-expanded') === 'true';
+        closeAll(null);
+        if (!isOpen) {
+          node.setAttribute('aria-expanded','true');
+          popup.classList.add('open');
+        }
+      });
+
+      var closeBtn = popup.querySelector('.map-popup-close');
+      if (closeBtn) closeBtn.addEventListener('click', function(e){
+        e.stopPropagation();
+        closeAll(null);
+      });
+
+      popup.addEventListener('click', function(e){ e.stopPropagation(); });
+    });
+
+    document.addEventListener('click', function(){ closeAll(null); });
+    document.addEventListener('keydown', function(e){
+      if (e.key === 'Escape') closeAll(null);
+    });
   })();
 </script>
 </body>
