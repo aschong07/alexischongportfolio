@@ -342,6 +342,12 @@
   .resume-side{text-align:center}
   .resume-side .mono{display:block;color:var(--dust);font-size:.78rem;margin-top:12px}
 
+  .skills-block{margin-top:26px;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:30px 34px;box-shadow:0 10px 30px rgba(0,0,0,0.06)}
+  .skills-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px 32px}
+  .skill-label{font-family:'IBM Plex Mono',monospace;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--cold);margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid var(--line)}
+  .skill-chips{display:flex;flex-wrap:wrap;gap:8px}
+  @media (max-width:700px){.skills-grid{grid-template-columns:1fr}.skills-block{padding:24px 22px}}
+
   /* ---------- gallery ---------- */
   .gallery-wrap{position:relative}
   .gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
@@ -741,6 +747,59 @@
       <div class="resume-side">
         <a class="btn primary" href="https://drive.google.com/file/d/1xn8TT-bGbycK9Ma6-P9hTbKlUeRjtUId/view?usp=sharing" target="_blank" rel="noopener noreferrer">Open my resume</a>
         <span class="mono">shared by request &middot; updated Jul 2026</span>
+      </div>
+    </div>
+
+    <div class="skills-block">
+      <div class="skills-grid">
+        <div class="skill-cat">
+          <div class="skill-label">Antenna &amp; EM</div>
+          <div class="skill-chips">
+            <span class="fact">Parabolic reflector / feedhorn systems</span>
+            <span class="fact">Impedance matching</span>
+            <span class="fact">S-parameters</span>
+            <span class="fact">Microwave network analysis</span>
+            <span class="fact">Antenna pointing / mount design</span>
+          </div>
+        </div>
+        <div class="skill-cat">
+          <div class="skill-label">RF &amp; Hardware</div>
+          <div class="skill-chips">
+            <span class="fact">RF component selection</span>
+            <span class="fact">Circuit design</span>
+            <span class="fact">Board bring-up &amp; test</span>
+            <span class="fact">PCB-level troubleshooting</span>
+          </div>
+        </div>
+        <div class="skill-cat">
+          <div class="skill-label">Test Equipment</div>
+          <div class="skill-chips">
+            <span class="fact">VNA</span>
+            <span class="fact">Spectrum analyzer</span>
+            <span class="fact">Oscilloscope</span>
+            <span class="fact">Network analyzer</span>
+            <span class="fact">Digitizer</span>
+            <span class="fact">Adjustable power supply</span>
+          </div>
+        </div>
+        <div class="skill-cat">
+          <div class="skill-label">Software</div>
+          <div class="skill-chips">
+            <span class="fact">Python &middot; NumPy / SciPy / Matplotlib</span>
+            <span class="fact">MATLAB</span>
+            <span class="fact">C / C++</span>
+            <span class="fact">Linux</span>
+            <span class="fact">Git / GitHub</span>
+          </div>
+        </div>
+        <div class="skill-cat">
+          <div class="skill-label">Design Tools</div>
+          <div class="skill-chips">
+            <span class="fact">KiCad</span>
+            <span class="fact">EasyEDA</span>
+            <span class="fact">Onshape</span>
+          </div>
+        </div>
       </div>
     </div>
   </section>
