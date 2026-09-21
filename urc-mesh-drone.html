@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>URC Mesh Radio Network &amp; Autonomous Drone | Alexis Chong</title>
+<meta name="description" content="Building a Pixhawk/Orange Cube drone and a mesh radio network linking rover, drone, and ground station for the University Rover Challenge, plus early autonomy and LLM prototyping.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="project.css">
+</head>
+<body>
+
+<nav>
+  <div class="nav-in">
+    <a class="nav-name" href="index.html">Alexis Chong</a>
+    <a class="nav-back" href="index.html#projects">&larr; Back to portfolio</a>
+  </div>
+</nav>
+
+<main class="wrap">
+  <div class="p-hero">
+    <div class="eyebrow">University Rover Challenge &middot; Team RoSE</div>
+    <h1>URC Mesh Radio Network &amp; Autonomous Drone</h1>
+    <p class="lede">Building a custom drone for the rover team, and the mesh radio network that lets the rover, the drone, and the ground station all talk to each other. Alongside that, early work on autonomy: expanding the rover's camera coverage to train a driving model, and prototyping an LLM-based way to flag anomalies in the drone's imagery.</p>
+
+    <dl class="meta">
+      <div><dt>Role</dt><dd>Comms &amp; Avionics Lead</dd></div>
+      <div><dt>Team</dt><dd>Team RoSE, UH M&#257;noa</dd></div>
+      <div><dt>Competition</dt><dd>University Rover Challenge</dd></div>
+      <div><dt>Status</dt><dd>In progress</dd></div>
+    </dl>
+  </div>
+
+  <section>
+    <p class="sec-note">This builds on my rover telemetry work — see the <a href="rover-comms-avionics.html">Rover Comms &amp; Avionics &rarr;</a> page for the dual-band link this mesh extends.</p>
+  </section>
+
+  <section>
+    <h2>Building the drone</h2>
+    <p>The airframe is built around a <strong>Pixhawk / Orange Cube</strong> flight controller. Right now the main constraint I'm working through is power consumption — figuring out what the airframe can actually carry and sustain once the radio, compute, and camera payload are all drawing from the same battery budget.</p>
+  </section>
+
+  <section>
+    <h2>A mesh network for three nodes</h2>
+    <p>The rover, the drone, and the ground station all need to reach each other, which is a different problem than a single point-to-point link. I'm implementing a <strong>mesh radio network</strong> so that any node can relay for another — the drone can extend the rover's range back to the ground station, or vice versa, instead of every link depending on a single direct path.</p>
+  </section>
+
+  <section>
+    <h2>Beyond the radio link</h2>
+    <p>Two threads growing out of this work, both earlier-stage: expanding the rover's <strong>camera coverage</strong> to gather enough footage to train a <strong>locally-run autonomous driving model</strong>, and prototyping an <strong>LLM-based anomaly detector</strong> that looks at the drone's imagery and flags what looks wrong.</p>
+    <div class="facts">
+      <span class="fact">RF communications</span>
+      <span class="fact">Mesh networking</span>
+      <span class="fact">Pixhawk</span>
+      <span class="fact">Flight controllers</span>
+      <span class="fact">Autonomous systems</span>
+      <span class="fact">LLM</span>
+      <span class="fact">Computer vision</span>
+      <span class="fact">Drone hardware</span>
+    </div>
+  </section>
+
+  <div class="p-foot">
+    <a class="btn primary" href="index.html#projects">&larr; All projects</a>
+    <span class="mono">Team RoSE &middot; University of Hawai&#699;i at M&#257;noa</span>
+  </div>
+</main>
+
+</body>
+</html>

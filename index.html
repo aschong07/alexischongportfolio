@@ -305,7 +305,7 @@
     font-size:1.1rem;line-height:1;color:var(--dust);cursor:pointer;padding:4px;
   }
   .map-popup-close:hover{color:var(--moonlight)}
-  #node-lmaps{left:calc(7.78% + 40px);transform:translate(0,-100%)}
+  #node-lmaps{left:calc(6.67% + 40px);transform:translate(0,-100%)}
   #node-lmaps.below{transform:translate(0,0)}
   #node-pathfinder{left:auto;right:2%;transform:translate(0,-100%)}
   #node-pathfinder.below{transform:translate(0,0)}
@@ -561,92 +561,103 @@
     <div class="mission-map" id="missionMap">
       <div class="map-stars" aria-hidden="true"></div>
       <svg class="map-trail" viewBox="0 0 900 400" preserveAspectRatio="none" aria-hidden="true">
-        <path d="M70,300 Q130,60 190,110 T310,300 T430,110 T550,300 T670,110 T790,300 T860,130" />
+        <path d="M60,300 Q114.3,60 168.6,110 T277.1,300 T385.7,110 T494.3,300 T602.9,110 T711.4,300 T820.0,110 T870,140" />
       </svg>
 
-      <button type="button" class="map-node" style="left:7.78%;top:75%" data-target="node-lmaps" aria-expanded="false">
+      <button type="button" class="map-node" style="left:6.67%;top:75%" data-target="node-lmaps" aria-expanded="false">
         <span class="dot"></span>
         <span class="label">L-MAPS</span>
       </button>
-      <button type="button" class="map-node" style="left:21.11%;top:27.5%" data-target="node-radiometer" aria-expanded="false">
+      <button type="button" class="map-node" style="left:18.73%;top:27.5%" data-target="node-radiometer" aria-expanded="false">
         <span class="dot"></span>
         <span class="label">Radiometer</span>
       </button>
-      <button type="button" class="map-node" style="left:34.44%;top:75%" data-target="node-rover" aria-expanded="false">
+      <button type="button" class="map-node" style="left:30.79%;top:75%" data-target="node-rover" aria-expanded="false">
         <span class="dot"></span>
         <span class="label">Rover Comms</span>
       </button>
-      <button type="button" class="map-node" style="left:47.78%;top:27.5%" data-target="node-hokulele" aria-expanded="false">
+      <button type="button" class="map-node" style="left:42.86%;top:27.5%" data-target="node-drone" aria-expanded="false">
+        <span class="dot"></span>
+        <span class="label">Mesh &amp; Drone</span>
+      </button>
+      <button type="button" class="map-node" style="left:54.92%;top:75%" data-target="node-hokulele" aria-expanded="false">
         <span class="dot"></span>
         <span class="label">H&#333;k&#363;lele</span>
       </button>
-      <button type="button" class="map-node" style="left:61.11%;top:75%" data-target="node-petal" aria-expanded="false">
+      <button type="button" class="map-node" style="left:66.98%;top:27.5%" data-target="node-petal" aria-expanded="false">
         <span class="dot"></span>
         <span class="label">PETAL</span>
       </button>
-      <button type="button" class="map-node" style="left:74.44%;top:27.5%" data-target="node-aefles" aria-expanded="false">
+      <button type="button" class="map-node" style="left:79.05%;top:75%" data-target="node-aefles" aria-expanded="false">
         <span class="dot"></span>
         <span class="label">AEFLES</span>
       </button>
-      <button type="button" class="map-node" style="left:87.78%;top:75%" data-target="node-cleanroom" aria-expanded="false">
+      <button type="button" class="map-node" style="left:91.11%;top:27.5%" data-target="node-cleanroom" aria-expanded="false">
         <span class="dot"></span>
         <span class="label">Cleanroom</span>
       </button>
-      <button type="button" class="map-node" style="left:95.56%;top:32.5%" data-target="node-pathfinder" aria-expanded="false">
+      <button type="button" class="map-node" style="left:96.67%;top:35%" data-target="node-pathfinder" aria-expanded="false">
         <span class="dot"></span>
         <span class="label">Pathfinder</span>
       </button>
 
-      <div class="map-popup" id="node-lmaps" style="left:7.78%;top:75%">
+      <div class="map-popup" id="node-lmaps" style="left:6.67%;top:75%">
         <button type="button" class="map-popup-close" aria-label="Close">&times;</button>
         <div class="tag">NASA Artemis &middot; HSFL</div>
         <h3>L-MAPS</h3>
         <p>Supporting a lunar heat-flow radiometer for the Artemis Lunar Terrain Vehicle.</p>
         <a class="detail-link" href="l-maps.html">View project &rarr;</a>
       </div>
-      <div class="map-popup" id="node-radiometer" style="left:21.11%;top:27.5%">
+      <div class="map-popup" id="node-radiometer" style="left:18.73%;top:27.5%">
         <button type="button" class="map-popup-close" aria-label="Close">&times;</button>
         <div class="tag">HIGP &middot; Student observatory</div>
         <h3>Microwave radiometer</h3>
         <p>Built and calibrated a 1.2&nbsp;m radiometer, measured the Sun at roughly 10,000&nbsp;K.</p>
         <a class="detail-link" href="microwave-radiometer.html">View project &rarr;</a>
       </div>
-      <div class="map-popup" id="node-rover" style="left:34.44%;top:75%">
+      <div class="map-popup" id="node-rover" style="left:30.79%;top:75%">
         <button type="button" class="map-popup-close" aria-label="Close">&times;</button>
         <div class="tag">University Rover Challenge</div>
         <h3>Rover Comms &amp; Avionics</h3>
         <p>Dual-band telemetry and the power/data architecture for Team RoSE's rover.</p>
         <a class="detail-link" href="rover-comms-avionics.html">View project &rarr;</a>
       </div>
-      <div class="map-popup" id="node-hokulele" style="left:47.78%;top:27.5%">
+      <div class="map-popup" id="node-drone" style="left:42.86%;top:27.5%">
+        <button type="button" class="map-popup-close" aria-label="Close">&times;</button>
+        <div class="tag">University Rover Challenge</div>
+        <h3>Mesh Network &amp; Drone</h3>
+        <p>A Pixhawk/Orange Cube drone and a mesh radio network for the rover, drone, and ground station.</p>
+        <a class="detail-link" href="urc-mesh-drone.html">View project &rarr;</a>
+      </div>
+      <div class="map-popup" id="node-hokulele" style="left:54.92%;top:75%">
         <button type="button" class="map-popup-close" aria-label="Close">&times;</button>
         <div class="tag">Rocketry &middot; Finalist</div>
         <h3>Team H&#333;k&#363;lele</h3>
         <p>Flight computer testing and a Yagi-antenna ground station for a 2-stage rocket.</p>
         <a class="detail-link" href="team-hokulele.html">View project &rarr;</a>
       </div>
-      <div class="map-popup" id="node-petal" style="left:61.11%;top:75%">
+      <div class="map-popup" id="node-petal" style="left:66.98%;top:27.5%">
         <button type="button" class="map-popup-close" aria-label="Close">&times;</button>
         <div class="tag">NASA RASC-AL &middot; Finalist</div>
         <h3>Project PETAL</h3>
         <p>Lunar habitat power architecture and thermal modeling for a crewed surface mission.</p>
         <a class="detail-link" href="project-petal.html">View project &rarr;</a>
       </div>
-      <div class="map-popup" id="node-aefles" style="left:74.44%;top:27.5%">
+      <div class="map-popup" id="node-aefles" style="left:79.05%;top:75%">
         <button type="button" class="map-popup-close" aria-label="Close">&times;</button>
         <div class="tag">Grant-funded &middot; Project lead</div>
         <h3>AEFLES</h3>
         <p>A real-time structural strain sensing system with embedded sensors and simulation.</p>
         <a class="detail-link" href="aefles-strain-sensing.html">View project &rarr;</a>
       </div>
-      <div class="map-popup" id="node-cleanroom" style="left:87.78%;top:75%">
+      <div class="map-popup" id="node-cleanroom" style="left:91.11%;top:27.5%">
         <button type="button" class="map-popup-close" aria-label="Close">&times;</button>
         <div class="tag">UH M&#257;noa cleanroom</div>
         <h3>Semiconductor fabrication</h3>
         <p>Photolithography and thermal evaporation, fabricating sensors and OLED structures.</p>
         <a class="detail-link" href="semiconductor-fabrication.html">View project &rarr;</a>
       </div>
-      <div class="map-popup" id="node-pathfinder" style="left:95.56%;top:32.5%">
+      <div class="map-popup" id="node-pathfinder" style="left:96.67%;top:35%">
         <button type="button" class="map-popup-close" aria-label="Close">&times;</button>
         <div class="tag">HACC &middot; Finalist</div>
         <h3>UH Pathfinder</h3>
@@ -677,6 +688,16 @@
           <h3>Rover Communications &amp; Avionics Lead</h3>
           <p>I lead the communications and avionics subsystem for Team RoSE: a dual-band 900&nbsp;MHz / 2.4&nbsp;GHz telemetry link, and the power and data architecture that runs the whole rover. The team finished top-38 globally.</p>
           <a class="detail-link" href="rover-comms-avionics.html">Explore rover comms &amp; avionics &rarr;</a>
+        </div>
+      </article>
+
+      <article class="cardp">
+        <figure class="shot empty" data-need="add photo &rarr; drone build or mesh network setup"></figure>
+        <div class="feat-body">
+          <div class="tag cold">University Rover Challenge</div>
+          <h3>URC Mesh Radio Network &amp; Autonomous Drone</h3>
+          <p>Building a Pixhawk/Orange Cube drone and a mesh radio network linking the rover, drone, and ground station, plus early autonomy and LLM prototyping. In progress.</p>
+          <a class="detail-link" href="urc-mesh-drone.html">Explore the mesh network &amp; drone &rarr;</a>
         </div>
       </article>
 
@@ -918,7 +939,7 @@
     var map = document.getElementById('missionMap');
     if (!map) return;
     var nodes = map.querySelectorAll('.map-node');
-    var belowIds = ['node-radiometer','node-hokulele','node-aefles','node-pathfinder'];
+    var belowIds = ['node-radiometer','node-drone','node-petal','node-cleanroom','node-pathfinder'];
 
     function closeAll(except){
       nodes.forEach(function(n){
