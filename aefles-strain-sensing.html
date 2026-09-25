@@ -36,13 +36,15 @@
   </div>
 
   <section>
+    <div class="eyebrow phase">01 &middot; Requirements</div>
     <h2>The idea</h2>
     <p>Structures deform under load in ways that are hard to predict from the outside, and by the time damage is visible you've usually missed the interesting part. AEFLES instruments the structure directly: embedded strain sensors report how it's actually flexing, in real time, while it's loaded.</p>
     <p>The value is in the word <em>real-time</em>. A post-test inspection tells you where a structure ended up. A live strain readout tells you how it got there — which load path carried the force, which region responded first, and whether the structure is behaving the way the model said it would.</p>
   </section>
 
   <section>
-    <h2>What I built and led</h2>
+    <div class="eyebrow phase">02 &middot; Design process</div>
+    <h2>What I planned to build and lead</h2>
     <div class="grid">
       <div class="card">
         <span class="mono">Hardware</span>
@@ -57,20 +59,16 @@
       <div class="card">
         <span class="mono">Project</span>
         <h3>Leading the build</h3>
-        <p>Writing the funded proposal into a real schedule, dividing the work, and keeping hardware and modeling moving in step.</p>
+        <p>Writing the funded proposal into a real schedule, dividing the work, and keeping hardware and modeling moving in step. The proposal promises something; the schedule is where you find out what that actually costs in hours.</p>
       </div>
     </div>
-    <p style="margin-top:28px">The interesting engineering problem sat between those first two boxes. Strain signals are small, and the difference between a real structural response and an artifact of how a sensor was mounted is not obvious from the data alone. Having a simulation to compare against is what makes the measurement trustworthy — and having real measurements is what keeps the simulation honest. Neither half is worth much without the other.</p>
   </section>
 
   <section>
-    <h2>What I took from it</h2>
-    <ul class="bullets">
-      <li><strong>Sensor placement is a design decision, not an installation detail.</strong><span>Where a sensor goes determines what you're capable of learning.</span></li>
-      <li><strong>Validate the instrument before you trust the data.</strong><span>The first surprising result is far more likely to be a mounting problem than a discovery.</span></li>
-      <li><strong>Leading a funded project is scoping.</strong><span>The proposal promises something; the schedule is where you find out what that actually costs in hours.</span></li>
-      <li><strong>Model and measurement are a loop.</strong><span>They correct each other, and the disagreements between them are where the learning is.</span></li>
-    </ul>
+    <div class="eyebrow phase">03 &middot; Construction</div>
+    <h2>What I built</h2>
+    <p>The interesting engineering problem sat between hardware and software. Strain signals are small, and the difference between a real structural response and an artifact of how a sensor was mounted is not obvious from the data alone. Having a simulation to compare against is what makes the measurement trustworthy — and having real measurements is what keeps the simulation honest. Neither half is worth much without the other, so I built them together rather than bolting simulation on after the sensors were already in place.</p>
+    <p><strong>Sensor placement</strong> was treated as a design decision, not an installation detail — where a sensor goes determines what you're capable of learning, so it had to be decided against the model, not just against convenience.</p>
     <div class="facts">
       <span class="fact">Strain sensing</span>
       <span class="fact">Embedded avionics</span>
@@ -78,6 +76,19 @@
       <span class="fact">Julia</span>
       <span class="fact">Grant-funded</span>
     </div>
+  </section>
+
+  <section>
+    <div class="eyebrow phase">04 &middot; How I fixed it</div>
+    <h2>Telling a real signal from a mounting artifact</h2>
+    <p>The first surprising result out of a new sensor is far more likely to be a mounting problem than a discovery, so the instrument had to be validated before I trusted anything it reported. That meant checking every surprising reading against the simulation first: if the model and the sensor disagreed, the question wasn't automatically "what did we discover" — it was "which one of these is wrong, and why."</p>
+    <p>Model and measurement turned out to be a loop, not a one-way check. They correct each other, and the disagreements between them are where the actual learning happens.</p>
+  </section>
+
+  <section>
+    <div class="eyebrow phase">05 &middot; Result</div>
+    <h2>What success looked like</h2>
+    <p>A working real-time strain sensing system, with embedded sensors and simulation validating each other closely enough to trust the readings — and a funded proposal turned into an actual build and schedule, not just a plan on paper.</p>
   </section>
 
   <section>

@@ -36,12 +36,14 @@
   </div>
 
   <section>
+    <div class="eyebrow phase">01 &middot; Requirements</div>
     <h2>Why this work matters to me</h2>
     <p>Most of my projects live at the board level — you buy a component, you trust its datasheet, you design around it. Cleanroom work is the layer underneath that: it's where the component itself comes from. Spending time there changed how I read a datasheet, because I've now seen how much process control sits behind a single specified number.</p>
-    <p>It's also the most unforgiving work I've done. A device is built up one layer at a time, and a mistake in an early step doesn't announce itself — it shows up at the end, as a device that doesn't work, with no obvious way to tell which of the fifteen preceding steps was responsible.</p>
+    <p>It's also the most unforgiving work I've done. A device is built up one layer at a time, and a mistake in an early step doesn't announce itself — it shows up at the end, as a device that doesn't work, with no obvious way to tell which of the fifteen preceding steps was responsible. A working device is the only honest pass/fail signal, which sets the bar for every step along the way.</p>
   </section>
 
   <section>
+    <div class="eyebrow phase">02 &middot; Design process</div>
     <h2>The processes</h2>
     <div class="grid">
       <div class="card">
@@ -63,14 +65,9 @@
   </section>
 
   <section>
+    <div class="eyebrow phase">03 &middot; Construction</div>
     <h2>What I fabricated</h2>
     <p>I worked on <strong>sensor devices</strong> and <strong>OLED structures</strong>, which are a good pairing to learn on: both are built from stacked thin films, and both fail in ways that teach you something specific. OLEDs in particular are punishing about layer quality and contamination — a device either lights up or it doesn't, and the answer is a fairly blunt verdict on how careful you were.</p>
-    <ul class="bullets">
-      <li><strong>Alignment is everything.</strong><span>Layers that are individually perfect still give you nothing if they don't register with each other.</span></li>
-      <li><strong>Contamination is invisible until it isn't.</strong><span>Most of cleanroom discipline is protecting against problems you'll never directly observe.</span></li>
-      <li><strong>Repeatability beats a single good result.</strong><span>One working device is luck; a process that produces working devices is engineering.</span></li>
-      <li><strong>Patience is a technical skill.</strong><span>Rushing a step to save ten minutes routinely costs an entire run.</span></li>
-    </ul>
     <div class="facts">
       <span class="fact">Photolithography</span>
       <span class="fact">Thermal evaporation</span>
@@ -78,6 +75,19 @@
       <span class="fact">OLED structures</span>
       <span class="fact">Cleanroom protocol</span>
     </div>
+  </section>
+
+  <section>
+    <div class="eyebrow phase">04 &middot; How I fixed it</div>
+    <h2>Debugging a process you can't see mid-run</h2>
+    <p>You can't inspect most of what matters while a run is in progress — contamination is invisible until it isn't, and alignment errors between layers don't show up until the device is finished and either works or doesn't. So the fix isn't a debugging step you do after the fact; it's built into the discipline itself: consistent handling and careful record-keeping so that when a device fails, the log of exactly what happened at each step is the only real diagnostic tool available.</p>
+    <p>The other lesson was pacing. Rushing a step to save ten minutes routinely costs an entire run, so patience turned out to be a technical skill in its own right, not just a virtue.</p>
+  </section>
+
+  <section>
+    <div class="eyebrow phase">05 &middot; Result</div>
+    <h2>What success looked like</h2>
+    <p>Repeatability beats a single good result — one working device is luck, but a process that reliably produces working devices is engineering. That's the bar I was working toward: not just getting one sensor or OLED to work, but getting the process control right enough that it would work again.</p>
   </section>
 
   <section>

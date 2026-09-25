@@ -36,7 +36,8 @@
   </div>
 
   <section>
-    <h2>What the subsystem has to do</h2>
+    <div class="eyebrow phase">01 &middot; Requirements</div>
+    <h2>What the rover needed</h2>
     <p>The University Rover Challenge runs in open desert terrain, and the rover has to be driven entirely from a ground station that can be hundreds of meters away with no line-of-sight guarantee. That puts two hard requirements on my subsystem: the link can never be the reason we lose the rover, and every board, motor, and camera on the vehicle has to get clean power and a data path back to the onboard computer.</p>
     <p>So the work splits into two halves that have to agree with each other — the <strong>radio link</strong> that carries video and commands, and the <strong>avionics</strong> that distribute power and data inside the chassis. I own both, which means most of my job is making sure a decision on one side doesn't quietly break the other.</p>
     <div class="facts">
@@ -49,21 +50,25 @@
   </section>
 
   <section>
-    <h2>The communications architecture</h2>
-    <p class="sec-note">A dual-band link, deliberately split so that losing one band doesn't mean losing the rover.</p>
-    <p>The ground station computers sit behind a router that feeds two radios through a PoE injector: a <strong>Rocket M900</strong> on 900&nbsp;MHz and a <strong>Rocket M2</strong> on 2.4&nbsp;GHz. Each drives its own cross-sectional antenna aimed downrange. On the rover, matching omni-directional antennas feed a second pair of Rocket radios, which land on an onboard PoE switch shared by the Jetson and the Raspberry Pi.</p>
-    <p>The two bands do different jobs. <strong>2.4&nbsp;GHz</strong> carries the bandwidth — camera feeds and everything the driver needs to see. <strong>900&nbsp;MHz</strong> carries less data but propagates far better through terrain and vegetation, so it's the band that keeps commands and telemetry flowing when the high-rate link degrades. The omni-directional antennas on the rover matter for the same reason: the rover turns constantly, and it can't be responsible for keeping itself pointed at the ground station.</p>
+    <div class="eyebrow phase">02 &middot; Design process</div>
+    <h2>Choosing dual-band, and one power tree</h2>
+    <p class="sec-note">Two decisions the rest of the subsystem hangs off of.</p>
+    <p>On the comms side, the decision was to split the link across <strong>two bands</strong> rather than push everything through one fast radio. <strong>2.4&nbsp;GHz</strong> carries the bandwidth — camera feeds and everything the driver needs to see. <strong>900&nbsp;MHz</strong> carries less data but propagates far better through terrain and vegetation, so it's the band that keeps commands and telemetry flowing when the high-rate link degrades. Splitting bands only pays off if the system actually degrades gracefully onto the surviving one, so that had to be an architecture decision made at the start, not something patched in later.</p>
+    <p>On the power side, the team standardized on a <strong>lower system voltage</strong> specifically so motor controllers could be driven directly, cutting out extra conversion stages and the failure points each one adds. That decision is why the battery, the distribution board, and the fusing strategy below all fit together as one design instead of three separate ones bolted together.</p>
+  </section>
+
+  <section>
+    <div class="eyebrow phase">03 &middot; Construction</div>
+    <h2>What we built</h2>
+    <p class="sec-note">The comms chain, the power tree, and the RF matching behind both.</p>
+    <p>The ground station computers sit behind a router that feeds two radios through a PoE injector: a <strong>Rocket M900</strong> on 900&nbsp;MHz and a <strong>Rocket M2</strong> on 2.4&nbsp;GHz. On the rover, a matching pair of Rocket radios lands on an onboard PoE switch shared by the Jetson and the Raspberry Pi, running as a <strong>MIMO network</strong> across antenna arrays on both bands for reliable telemetry and control over extended distances. The rover turns constantly, so it can't be responsible for keeping itself pointed at the ground station the way a fixed dish could — that shapes the whole antenna layout.</p>
 
     <figure class="figblock">
       <img src="Rover comms diagram.png" alt="Block diagram of the rover communications chain from ground station computers through the router, PoE injector, and Rocket M900 and M2 radios, across the 900 MHz and 2.4 GHz antenna links, to the onboard PoE switch, Jetson Xavier, and Raspberry Pi">
       <figcaption>Communications block diagram. Ground station on the left, rover on the right, with the two RF hops in the middle. Black is Ethernet, blue is coaxial, dotted is the wireless link, and red is power — keeping those four separated on the drawing is what makes it useful during field debugging.</figcaption>
     </figure>
-  </section>
 
-  <section>
-    <h2>Matching the link</h2>
-    <p class="sec-note">A Smith chart — the standard way RF engineers visualize impedance matching across a link.</p>
-    <div class="rf-figure">
+    <div class="rf-figure" style="margin-top:28px">
       <svg viewBox="0 0 320 320" role="img" aria-label="Smith chart showing constant-resistance and constant-reactance grid lines, with a dashed path from an unmatched impedance point to the matched 50-ohm center">
         <defs><clipPath id="smithBound"><circle cx="160" cy="160" r="150"/></clipPath></defs>
         <g clip-path="url(#smithBound)" fill="none" stroke="var(--line)" stroke-width="1">
@@ -86,14 +91,10 @@
       </svg>
       <p class="rf-caption">Every antenna has its own impedance, and it rarely starts out matched to the radio's 50&#937; feedline. The chart maps that mismatch — the dashed line traces tuning toward the center, where reflection is minimized and the link actually gets the power you're feeding it instead of bouncing it back.</p>
     </div>
-  </section>
 
-  <section>
-    <h2>The avionics and power architecture</h2>
-    <p class="sec-note">One battery, several voltage rails, and a lot of things that all want to be the priority.</p>
-    <p>Everything on the rover runs off a single <strong>100&nbsp;A battery</strong> through a central electric power system that breaks out the rails each load needs — 12&nbsp;V to the motor controllers, 15&nbsp;V to the Jetson, and 5&nbsp;V to the servos and logic. The <strong>Jetson AGX Xavier</strong> is the main compute; a USB hub aggregates six camera feeds into it, and a pair of Arduinos handle low-level I/O with the second one carried as a backup.</p>
-    <p>Actuation is where the current goes. Four <strong>Spark Flex</strong> controllers drive the wheels, two <strong>Spark Max</strong> controllers run the REV NEO arm motors, three more flex controllers live on the arm itself, and two <strong>RoboClaw 2×15&nbsp;A</strong> controllers handle the payload servos. The science payload and the LED status mast hang off the same tree.</p>
-    <p>The rule I've held to across the whole harness is that <strong>power and data never share a run</strong>: 12&nbsp;AWG for power, 24/26&nbsp;AWG for data, colour-coded and documented, so that when something misbehaves in the field we can trace it without pulling the rover apart.</p>
+    <p style="margin-top:28px">Everything on the rover runs off a custom <strong>4S8P lithium-ion battery</strong> — 533&nbsp;Wh at 14.8&nbsp;V, rated for 100&nbsp;A continuous discharge, with an integrated BMS that enables direct charging and simplifies the rest of the power distribution. From there, a <strong>PDB500 power distribution board</strong> regulates the 12&nbsp;V and 5&nbsp;V rails, supports up to 500&nbsp;A continuous current, and routes everything through appropriately rated fuses sized to each load's expected current draw and wiring limits. The 15&nbsp;V rail to the Jetson is handled separately. The <strong>Jetson AGX Xavier</strong> is the main compute; a USB hub aggregates six camera feeds into it, and a pair of Arduinos handle low-level I/O with the second one carried as a backup.</p>
+    <p>Actuation is where the current goes. Four <strong>Spark Flex</strong> controllers drive the wheels, two <strong>Spark Max</strong> controllers run the REV NEO arm motors, three more flex controllers live on the arm itself, and two <strong>RoboClaw 2&times;15&nbsp;A</strong> controllers handle the payload servos. The science payload and the LED status mast hang off the same tree. On top of the electrical build, a <strong>Qt-based ground station UI</strong> gives live visualization of rover status, link connectivity, camera feeds, and system health.</p>
+    <p>The rule I've held to across the whole harness is that <strong>power and data never share a run</strong>: 12&nbsp;AWG for power, 24/26&nbsp;AWG for data, colour-coded and documented, and the electrical architecture is modular enough to pull a subsystem for maintenance safely mid-competition.</p>
 
     <figure class="figblock">
       <img src="Rover wiring diagram.png" alt="Full rover wiring diagram showing the battery and electric power system feeding motor controllers, the Jetson AGX, USB hub, cameras, Arduinos, servos, and LED payload, with power and data runs colour-coded">
@@ -102,13 +103,23 @@
   </section>
 
   <section>
-    <h2>What I learned building it</h2>
-    <ul class="bullets">
-      <li><strong>Redundancy has to be designed in, not added later.</strong><span>Splitting bands only helps if the system genuinely degrades gracefully onto the surviving one — that's an architecture decision made at the start, not a patch.</span></li>
-      <li><strong>The documentation is part of the hardware.</strong><span>A wiring diagram that's a week out of date is worse than none, because people trust it. Keeping these drawings current is most of what makes the subsystem maintainable by anyone but me.</span></li>
-      <li><strong>Field conditions are the real spec.</strong><span>Bench performance told us very little about what the link would do across desert terrain with the rover moving and turning.</span></li>
-      <li><strong>Leading a subsystem is mostly interfaces.</strong><span>Most of my time goes to the boundaries with the mechanical, arm, and software teams, making sure what I promised them is what they actually get.</span></li>
-    </ul>
+    <div class="eyebrow phase">04 &middot; How I fixed it</div>
+    <h2>Finding problems fast in the field</h2>
+    <p>Bench performance told us very little about what the link would actually do across desert terrain with the rover moving and turning — the real debugging happens on site, under time pressure, which means the harness has to be built to be diagnosed quickly rather than perfectly. That's the whole reason behind keeping power and data on separate, colour-coded runs and fusing every subsystem individually: when something misbehaves, the fault is isolated to one fuse or one coloured run instead of the whole rover, and we can trace it and swap the failed piece without pulling the chassis apart.</p>
+    <p>The documentation carries its share of that job too. A wiring diagram that's a week out of date is worse than none, because people trust it anyway — so it gets updated the same day anything on the rover changes, which is most of what makes the subsystem fixable by anyone on the team, not just me.</p>
+    <p>The power distribution board itself I designed and debugged in <strong>KiCad</strong>, sizing current draw, wire gauge, and battery capacity against how long a mission actually runs — the same fault-isolation logic that shapes the harness starts on the schematic, before any of it is soldered.</p>
+  </section>
+
+  <section>
+    <div class="eyebrow phase">05 &middot; Result</div>
+    <h2>What success looked like</h2>
+    <p>The dual-band MIMO link held up across the terrain the competition actually threw at it, and the Qt ground station UI kept the team looking at live rover status, connectivity, and system health instead of flying blind. Team RoSE finished <strong>top-38 globally</strong>. Leading a subsystem turned out to be mostly about interfaces — most of my time went to the boundaries with the mechanical, arm, and software teams, making sure what I promised them is what they actually got.</p>
+    <div class="facts">
+      <span class="fact">Top-38 globally</span>
+      <span class="fact">MIMO dual-band link</span>
+      <span class="fact">533 Wh / 14.8 V battery</span>
+      <span class="fact">Qt ground station UI</span>
+    </div>
   </section>
 
   <section>

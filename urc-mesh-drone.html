@@ -38,18 +38,21 @@
   </section>
 
   <section>
-    <h2>Building the drone</h2>
-    <p>The airframe is built around a <strong>Pixhawk / Orange Cube</strong> flight controller. Right now the main constraint I'm working through is power consumption — figuring out what the airframe can actually carry and sustain once the radio, compute, and camera payload are all drawing from the same battery budget.</p>
+    <div class="eyebrow phase">01 &middot; Requirements</div>
+    <h2>What the system needs to do</h2>
+    <p>The rover, a new drone, and the ground station all need to reach each other, which is a different problem than a single point-to-point link. And a drone adds a constraint the rover doesn't have: everything it carries — radio, compute, camera payload — has to fly on a battery budget the airframe can actually sustain.</p>
   </section>
 
   <section>
-    <h2>A mesh network for three nodes</h2>
-    <p>The rover, the drone, and the ground station all need to reach each other, which is a different problem than a single point-to-point link. I'm implementing a <strong>mesh radio network</strong> so that any node can relay for another — the drone can extend the rover's range back to the ground station, or vice versa, instead of every link depending on a single direct path.</p>
+    <div class="eyebrow phase">02 &middot; Design process</div>
+    <h2>Choosing a mesh over point-to-point</h2>
+    <p>Rather than a single direct link from each node to every other node, I'm implementing a <strong>mesh radio network</strong> so that any node can relay for another — the drone can extend the rover's range back to the ground station, or vice versa. On the airframe side, the drone is built around a <strong>Pixhawk / Orange Cube</strong> flight controller, chosen for the same reason most of my hardware choices get made: it's a well-supported, well-documented platform rather than something I'd have to fight to integrate.</p>
   </section>
 
   <section>
-    <h2>Beyond the radio link</h2>
-    <p>Two threads growing out of this work, both earlier-stage: expanding the rover's <strong>camera coverage</strong> to gather enough footage to train a <strong>locally-run autonomous driving model</strong>, and prototyping an <strong>LLM-based anomaly detector</strong> that looks at the drone's imagery and flags what looks wrong.</p>
+    <div class="eyebrow phase">03 &middot; Construction</div>
+    <h2>What's built so far</h2>
+    <p>The airframe is assembled around the Pixhawk/Orange Cube flight controller, and the mesh network implementation connecting the rover, drone, and ground station is underway. Alongside that, two earlier-stage threads are growing out of this work: expanding the rover's <strong>camera coverage</strong> to gather enough footage to train a <strong>locally-run autonomous driving model</strong>, and prototyping an <strong>LLM-based anomaly detector</strong> that looks at the drone's imagery and flags what looks wrong.</p>
     <div class="facts">
       <span class="fact">RF communications</span>
       <span class="fact">Mesh networking</span>
@@ -60,6 +63,18 @@
       <span class="fact">Computer vision</span>
       <span class="fact">Drone hardware</span>
     </div>
+  </section>
+
+  <section>
+    <div class="eyebrow phase">04 &middot; How I'm fixing it</div>
+    <h2>The current constraint: power budget</h2>
+    <p>Right now the main problem I'm working through is power consumption — figuring out what the airframe can actually carry and sustain once the radio, compute, and camera payload are all drawing from the same battery budget. That's an airframe-first constraint: the fix isn't just a more efficient radio or a lighter camera, it's finding the actual ceiling the airframe can lift and sizing everything else against it, rather than picking components first and hoping they fit.</p>
+  </section>
+
+  <section>
+    <div class="eyebrow phase">05 &middot; Where it stands</div>
+    <h2>In progress</h2>
+    <p>This project is still active — the drone airframe and mesh network are being built and tested now, and the autonomy and LLM work are earlier-stage prototypes rather than finished features. I'll update this page as each piece comes together.</p>
   </section>
 
   <div class="p-foot">

@@ -36,13 +36,15 @@
   </div>
 
   <section>
-    <h2>The instrument</h2>
+    <div class="eyebrow phase">01 &middot; Requirements</div>
+    <h2>What the instrument needs</h2>
     <p>L-MAPS is a radiometer designed to fly on the Artemis Lunar Terrain Vehicle and measure the heat flow beneath it as the rover traverses the surface. Heat flow is one of the more direct ways to probe the Moon's interior structure and thermal history — you're measuring the energy still leaking out of a body that's been cooling for billions of years, and inferring what's underneath from the rate.</p>
-    <p>Doing that from a moving vehicle, in the lunar thermal environment, is what makes the instrument hard. It has to be sensitive enough to resolve a small signal and rugged enough to survive a launch, a landing, and the surface itself.</p>
+    <p>Doing that from a moving vehicle, in the lunar thermal environment, is what makes the instrument hard. It has to be sensitive enough to resolve a small signal and rugged enough to survive a launch, a landing, and the surface itself — every RF front-end part has to be justified against that environment, not just against a datasheet.</p>
   </section>
 
   <section>
-    <h2>What I do on the project</h2>
+    <div class="eyebrow phase">02 &middot; Design process</div>
+    <h2>Evaluating the front end</h2>
     <p class="sec-note">Flight hardware moves slowly for a reason. Most of the work is making sure a decision is defensible before it's made.</p>
     <div class="grid">
       <div class="card">
@@ -61,19 +63,29 @@
         <p>Sourcing, lead times, documentation, and the planning that keeps a hardware build from stalling on a part nobody ordered in time.</p>
       </div>
     </div>
-    <p style="margin-top:28px">Alongside that, I work with the team and our JPL collaborators on mission planning and documentation. It's a mix of careful record-keeping and practical engineering judgment: every component has to make sense for this instrument, in this environment, on this mission — and you have to be able to show why.</p>
+    <p style="margin-top:28px">I evaluated and quantified roughly <strong>15 RF front-end components</strong> — couplers, switches, amplifiers, filters — pulling specs from vendor datasheets and checking each one against JPL design standards, not just against what the instrument needs on paper.</p>
   </section>
 
   <section>
-    <h2>What it's taught me</h2>
-    <ul class="bullets">
-      <li><strong>Requirements come before parts.</strong><span>The interesting engineering question is rarely "which component" — it's "what does the instrument actually need," and the part follows from that.</span></li>
-      <li><strong>Documentation is engineering.</strong><span>On a flight project, an undocumented decision may as well not have been made. Writing it down <em>is</em> the deliverable.</span></li>
-      <li><strong>Lead time is a design constraint.</strong><span>The best part in the world is the wrong choice if it arrives after integration.</span></li>
-      <li><strong>Working alongside JPL</strong><span>has shown me what a professional review standard looks like, and how much of spaceflight is the discipline of justifying yourself clearly.</span></li>
-    </ul>
+    <div class="eyebrow phase">03 &middot; Construction</div>
+    <h2>Building a Hawai&#699;i-assembled front end</h2>
+    <p>Alongside the parts evaluation, I work with the team and our JPL collaborators on mission planning and documentation. It's a mix of careful record-keeping and practical engineering judgment: every component has to make sense for this instrument, in this environment, on this mission — and you have to be able to show why. That evaluation work is what let the team assemble the front end here in Hawai&#699;i while still holding to flight-like performance, instead of needing to source a pre-integrated unit from JPL directly.</p>
+  </section>
+
+  <section>
+    <div class="eyebrow phase">04 &middot; How I fixed it</div>
+    <h2>Catching problems before they're expensive</h2>
+    <p>On a flight project, the expensive mistakes are the ones that show up after a part is already ordered or already integrated. The heritage check is the mechanism that catches those early — verifying a candidate part has a track record in a comparable environment before it's designed in, not after. Lead time works the same way: the best part in the world is the wrong choice if it arrives after integration, so vendor coordination and lead-time risk are part of the same decision as picking the part itself, not an afterthought.</p>
+    <p>Documentation is what makes any of that defensible later. On a flight project, an undocumented decision may as well not have been made — writing it down <em>is</em> the deliverable, because it's what a reviewer, or a teammate six months later, actually checks.</p>
+  </section>
+
+  <section>
+    <div class="eyebrow phase">05 &middot; Result</div>
+    <h2>What success looked like</h2>
+    <p>Evaluating those ~15 front-end components against JPL's design standards is what enabled a <strong>Hawai&#699;i-assembled front end with flight-like performance</strong> — the instrument didn't have to compromise on performance just because it was being built locally instead of at JPL. Working alongside JPL has also shown me what a professional review standard actually looks like, and how much of spaceflight engineering is the discipline of justifying yourself clearly.</p>
     <div class="facts">
-      <span class="fact">RF hardware</span>
+      <span class="fact">~15 RF components evaluated</span>
+      <span class="fact">Flight-like performance</span>
       <span class="fact">Flight heritage</span>
       <span class="fact">JPL collaboration</span>
       <span class="fact">Space Grant funded</span>
